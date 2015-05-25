@@ -66,6 +66,7 @@ public class TCPCommunicator extends AbstractCommunicator{
     @Override
     public void receivingCommunication(String message)
     {
+        System.out.print("Received message: " + message);
         notifyMessageReceived(message);
     }
     
