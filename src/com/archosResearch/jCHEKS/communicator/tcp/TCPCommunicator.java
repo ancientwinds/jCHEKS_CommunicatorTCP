@@ -49,6 +49,8 @@ public class TCPCommunicator extends AbstractCommunicator{
             System.out.println("Waiting for ACK");
             InputStream inFromDestination = clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
+            
+            //TODO Need a better way to 
             System.out.println("From dest: " + dataInFromDestination.readUTF());
             
             clientSocket.close();
@@ -64,9 +66,6 @@ public class TCPCommunicator extends AbstractCommunicator{
     public void receivingCommunication()
     {
         
-        
-        setChanged();
-        notifyObservers();
     }
     
     private Client getClientForSystemId(int systemId){

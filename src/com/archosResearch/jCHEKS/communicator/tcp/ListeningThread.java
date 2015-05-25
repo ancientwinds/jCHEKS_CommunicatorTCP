@@ -36,6 +36,8 @@ public class ListeningThread implements Runnable{
                 DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
                 
                 System.out.println("Received: " + dataIn.readUTF());
+                
+                //TODO better way to ack the sender.
                 dataOut.writeUTF("I received your message");
             }
                 
