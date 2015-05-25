@@ -26,7 +26,7 @@ public class TCPCommunicator extends AbstractCommunicator{
     public TCPCommunicator(int port){
         clients.add(new Client());
         
-        this.listenThread = new Thread(new ListeningThread(port));
+        this.listenThread = new Thread(new ListeningThread(port, this));
         this.listenThread.start();
     }
     

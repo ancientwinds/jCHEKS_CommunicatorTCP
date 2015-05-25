@@ -19,12 +19,14 @@ import java.util.logging.Logger;
  */
 public class ListeningThread implements Runnable{
     
-    private int port = 9000;
+    private int port;
+    private AbstractCommunicator communicator;
     private ServerSocket listeningSocket;
     private boolean running = true;
     
-    public ListeningThread(int port){
+    public ListeningThread(int port, AbstractCommunicator communicator){
         this.port = port;
+        this.communicator = communicator;
     }
     
      @Override
@@ -40,6 +42,7 @@ public class ListeningThread implements Runnable{
                 System.out.println("Received: " + dataIn.readUTF());
                 
                 //TODO better way to ack the sender.
+                this.communicator.receivingCommunication();
                 dataOut.writeUTF("I received your message");
             }                
             

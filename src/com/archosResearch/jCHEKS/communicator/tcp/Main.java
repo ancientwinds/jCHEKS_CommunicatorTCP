@@ -5,6 +5,7 @@
  */
 package com.archosResearch.jCHEKS.communicator.tcp;
 
+import java.awt.EventQueue;
 import java.io.Console;
 import java.util.Scanner;
 
@@ -16,7 +17,16 @@ public class Main {
     
     
     public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
+        
+        EventQueue.invokeLater(new Runnable() {
+        
+            @Override
+            public void run() {
+                TempGUI ex = new TempGUI();
+                ex.setVisible(true);
+            }
+        });
+        /*Scanner reader = new Scanner(System.in);
         System.out.println("Enter the port number");
         // get user input for a
         TCPCommunicator tcpCommunicator = null;
@@ -31,6 +41,6 @@ public class Main {
             if(a == 3){
                 tcpCommunicator.sendCommunication(new Communication("Test de sending"));
             }
-        }
+        }*/
     } 
 }
