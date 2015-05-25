@@ -64,9 +64,9 @@ public class TCPCommunicator extends AbstractCommunicator{
     }
     
     @Override
-    public void receivingCommunication()
+    public void receivingCommunication(String message)
     {
-        
+        notifyMessageReceived(message);
     }
     
     private Client getClientForSystemId(int systemId){

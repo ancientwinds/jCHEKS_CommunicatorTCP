@@ -15,5 +15,5 @@ public abstract class AbstractCommunicator extends CommunicatorObservable{
     protected Thread listenThread;
     
     public abstract boolean sendCommunication(Communication communication);
-    public abstract void receivingCommunication();
+    public abstract void receivingCommunication(String message);
 }

@@ -36,13 +36,13 @@ public class ListeningThread implements Runnable{
             
             while(running) {
                 Socket client = listeningSocket.accept();
+                System.out.println("Receiving communication...");
+                
                 DataInputStream dataIn = new DataInputStream(client.getInputStream());
                 DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
-                
-                System.out.println("Received: " + dataIn.readUTF());
-                
-                //TODO better way to ack the sender.
-                this.communicator.receivingCommunication();
+                                
+                this.communicator.receivingCommunication(dataIn.readUTF());
+                System.out.println("Sending ACK...");
                 dataOut.writeUTF("I received your message");
             }                
             
