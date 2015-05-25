@@ -6,7 +6,8 @@ package com.archosResearch.jCHEKS.communicator.tcp;
  */
 public class Temp {
 
-    public void testMethod()
-        {    }
+    public void testMethod() {
+        
+    }
 }
 
