@@ -9,10 +9,12 @@ package com.archosResearch.jCHEKS.communicator.tcp;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public abstract class CommunicatorObserver {
+public abstract class AbstractListeningThread implements Runnable{
     
-    public abstract void update();
-    
-    public abstract void messageReceived(String message);
-    public abstract void ackReceived();
+    protected AbstractCommunicator communicator;
+    protected boolean running = true;
+
+    public void stop(){
+        running = false;
+    }
 }

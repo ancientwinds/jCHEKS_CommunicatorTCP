@@ -32,9 +32,10 @@ public class TCPCommunicator extends AbstractCommunicator{
     
     @Override
     public boolean sendCommunication(Communication communication) {
-        Client destinationClient = getClientForSystemId(communication.getSystemId());
         
-        try {
+        try {   
+            Client destinationClient = getClientForSystemId(communication.getSystemId());
+
             System.out.println("Attempting to connect to " + destinationClient.getConnectionInfo());
             Socket clientSocket = new Socket(destinationClient.getIpAddress(), destinationClient.getPort());
             
@@ -57,26 +58,28 @@ public class TCPCommunicator extends AbstractCommunicator{
         } catch (IOException ex) {
             System.out.println("Could not create socket to the destination client.");
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
-        }  
+        } catch (Exception ex) {
+            System.out.println("Could not find client.");
+            Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        return false;
-        
+        return false;        
     }
     
     @Override
-    public void receivingCommunication()
+    public void receivingCommunication(String message)
     {
-        
+        notifyMessageReceived(message);
     }
     
-    private Client getClientForSystemId(int systemId){
+    private Client getClientForSystemId(int systemId) throws Exception{
         for (Client client : clients) {
             if (client.getSystemId() == systemId) {
                 return client;
             }
         }
         
-        return null;
+        throw new Exception("Client not found for the system id: " + systemId);
     }
 
    
