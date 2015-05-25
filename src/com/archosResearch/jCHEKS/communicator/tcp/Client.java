@@ -32,4 +32,14 @@ public class Client {
     public int getSystemId(){
         return this.systemId;
     }
+    
+    public String getConnectionInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("ip address: ");
+        sb.append(this.ipAddress);
+        sb.append(" on port: ");
+        sb.append(this.port);
+        
+        return sb.toString();
+    }
 }

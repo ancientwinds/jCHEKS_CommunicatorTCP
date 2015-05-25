@@ -13,7 +13,7 @@ import java.util.Observable;
  */
 public abstract class AbstractCommunicator extends Observable{
     
-    private Thread listenThread;
+    protected Thread listenThread;
     
     public abstract boolean sendCommunication(Communication communication);
 }
