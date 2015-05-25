@@ -50,7 +50,7 @@ public class TCPCommunicator extends AbstractCommunicator{
             InputStream inFromDestination = clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
             
-            //TODO Need a better way to 
+            notifyMessageACK();
             System.out.println("From dest: " + dataInFromDestination.readUTF());
             
             clientSocket.close();
@@ -63,6 +63,7 @@ public class TCPCommunicator extends AbstractCommunicator{
         
     }
     
+    @Override
     public void receivingCommunication()
     {
         

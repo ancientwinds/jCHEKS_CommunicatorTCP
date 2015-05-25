@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 public class ListeningThread implements Runnable{
     
     private int port = 9000;
+    private ServerSocket listeningSocket;
+    private boolean running = true;
     
     public ListeningThread(int port){
         this.port = port;
@@ -28,9 +30,9 @@ public class ListeningThread implements Runnable{
      @Override
     public void run() {
         try {
-            ServerSocket listeningSocket = new ServerSocket(this.port);
+            listeningSocket = new ServerSocket(this.port);
             
-            while(true) {
+            while(running) {
                 Socket client = listeningSocket.accept();
                 DataInputStream dataIn = new DataInputStream(client.getInputStream());
                 DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
@@ -39,12 +41,15 @@ public class ListeningThread implements Runnable{
                 
                 //TODO better way to ack the sender.
                 dataOut.writeUTF("I received your message");
-            }
-                
+            }                
             
-            //listeningSocket.close();
+            listeningSocket.close();
         } catch (IOException ex) {
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void stop(){
+        running = false;
     }
 }
