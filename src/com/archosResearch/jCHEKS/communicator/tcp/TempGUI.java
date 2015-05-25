@@ -52,7 +52,8 @@ public class TempGUI extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-        communicator = new TCPCommunicator((Integer.parseInt(text.getText())));
+            String[] ports = text.getText().split(",");
+        communicator = new TCPCommunicator(Integer.parseInt(ports[0]), Integer.parseInt(ports[1]));
         }
     }
     

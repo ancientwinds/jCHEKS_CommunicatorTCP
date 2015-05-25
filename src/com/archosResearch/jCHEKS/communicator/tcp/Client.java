@@ -15,9 +15,9 @@ public class Client {
     private int port;
     private int systemId;
     
-    public Client(){
+    public Client(int port){
         this.ipAddress = "127.0.0.1";
-        this.port = 9000;
+        this.port = port;
         this.systemId = 1;
     }
     

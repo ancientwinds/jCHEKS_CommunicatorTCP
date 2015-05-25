@@ -23,8 +23,8 @@ public class TCPCommunicator extends AbstractCommunicator{
 
     private ArrayList<Client> clients = new ArrayList<>();
     
-    public TCPCommunicator(int port){
-        clients.add(new Client());
+    public TCPCommunicator(int port, int clientPort){
+        clients.add(new Client(clientPort));
         
         this.listenThread = new Thread(new ListeningThread(port, this));
         this.listenThread.start();
