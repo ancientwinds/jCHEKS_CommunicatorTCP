@@ -26,8 +26,8 @@ public class TCPCommunicator extends AbstractCommunicator{
     public TCPCommunicator(int port){
         clients.add(new Client());
         
-        (new Thread(new ListeningThread(port))).start();
-        //(new Thread(new TCPCommunicator())).start();
+        this.listenThread = new Thread(new ListeningThread(port));
+        this.listenThread.start();
     }
     
     @Override
@@ -35,13 +35,18 @@ public class TCPCommunicator extends AbstractCommunicator{
         Client destinationClient = getClientForSystemId(communication.getSystemId());
         
         try {
+            System.out.println("Attempting to connect to " + destinationClient.getConnectionInfo());
             Socket clientSocket = new Socket(destinationClient.getIpAddress(), destinationClient.getPort());
             
-            System.out.println("Socket connected to destination: " + destinationClient.getIpAddress() + " on port: " + destinationClient.getPort());
+            System.out.println("Connection established to " + destinationClient.getConnectionInfo());
+            
             OutputStream outToDestination = clientSocket.getOutputStream();
             DataOutputStream dataOutToDestination = new DataOutputStream(outToDestination);
+            
+            System.out.println("Sending communication to destination...");
             dataOutToDestination.writeUTF(communication.getChipher());
             
+            System.out.println("Waiting for ACK");
             InputStream inFromDestination = clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
             System.out.println("From dest: " + dataInFromDestination.readUTF());
