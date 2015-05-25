@@ -20,9 +20,9 @@ public class CommunicatorObservable {
         this.observers.add(observer);
     }
     
-    public void notifyMessageReceived(String message){
+    public void notifyMessageReceived(){
         for(CommunicatorObserver observer: this.observers){
-            observer.messageReceived(message);
+            observer.messageReceived();
         }
     }
     

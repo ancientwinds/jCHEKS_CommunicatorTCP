@@ -17,10 +17,12 @@ import java.util.logging.Logger;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public class ListeningThread extends AbstractListeningThread{
+public class ListeningThread implements Runnable{
     
     private int port;
+    private AbstractCommunicator communicator;
     private ServerSocket listeningSocket;
+    private boolean running = true;
     
     public ListeningThread(int port, AbstractCommunicator communicator){
         this.port = port;
@@ -37,7 +39,11 @@ public class ListeningThread extends AbstractListeningThread{
                 DataInputStream dataIn = new DataInputStream(client.getInputStream());
                 DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
                 
-                this.communicator.receivingCommunication(dataIn.readUTF());
+                System.out.println("Received: " + dataIn.readUTF());
+                
+                //TODO better way to ack the sender.
+                this.communicator.receivingCommunication();
+                dataOut.writeUTF("I received your message");
             }                
             
             listeningSocket.close();
@@ -45,5 +51,8 @@ public class ListeningThread extends AbstractListeningThread{
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public void stop(){
+        running = false;
+    }
 }
