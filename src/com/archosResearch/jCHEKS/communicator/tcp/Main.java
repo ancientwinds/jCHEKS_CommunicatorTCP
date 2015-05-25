@@ -18,6 +18,7 @@ public class Main {
     
     public static void main(String[] args) {
         
+        //TODO Temporary UI for testing.
         EventQueue.invokeLater(new Runnable() {
         
             @Override
@@ -26,21 +27,5 @@ public class Main {
                 ex.setVisible(true);
             }
         });
-        /*Scanner reader = new Scanner(System.in);
-        System.out.println("Enter the port number");
-        // get user input for a
-        TCPCommunicator tcpCommunicator = null;
-        while(true){
-            int a = reader.nextInt();
-            if(a == 1){
-                tcpCommunicator = new TCPCommunicator(9000);
-            }
-            if(a == 2){
-                tcpCommunicator = new TCPCommunicator(9001);
-            }
-            if(a == 3){
-                tcpCommunicator.sendCommunication(new Communication("Test de sending"));
-            }
-        }*/
     } 
 }

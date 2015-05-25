@@ -15,9 +15,9 @@ public class Communication {
     private String chiperCheck;
     
     public Communication(String chiper)
-    {
-        this.chipher = chiper;
+    {        
         this.systemId = 1;
+        this.chipher = chiper;
         this.chiperCheck = "fdsdDS";
     }
     

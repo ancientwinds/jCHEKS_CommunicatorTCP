@@ -57,9 +57,10 @@ public class TCPCommunicator extends AbstractCommunicator{
         } catch (IOException ex) {
             System.out.println("Could not create socket to the destination client.");
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }  
         
-        return false;
+        return true;
         
     }
     
@@ -77,6 +78,7 @@ public class TCPCommunicator extends AbstractCommunicator{
             }
         }
         
+        //TODO Remove null and add an exception.
         return null;
     }
 
