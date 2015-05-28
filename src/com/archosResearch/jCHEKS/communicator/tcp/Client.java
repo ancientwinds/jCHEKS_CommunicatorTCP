@@ -13,13 +13,13 @@ public class Client {
     
     private String ipAddress;
     private int port;
-    private int systemId;
+    private String systemId;
     
     public Client(int aPort){
-        this(aPort, "127.0.0.1", 1);
+        this(aPort, "127.0.0.1", "tempID");
     }
     
-    public Client(int aPort, String aIp, int aSystemId){
+    public Client(int aPort, String aIp, String aSystemId){
         this.ipAddress = aIp;
         this.port = aPort;
         this.systemId = aSystemId;
@@ -33,7 +33,7 @@ public class Client {
         return this.port;
     } 
     
-    public int getSystemId(){
+    public String getSystemId(){
         return this.systemId;
     }
     

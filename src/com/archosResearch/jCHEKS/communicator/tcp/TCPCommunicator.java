@@ -24,11 +24,6 @@ public class TCPCommunicator extends AbstractCommunicator{
 
     private ArrayList<Client> clients = new ArrayList<>();
     
-    /**
-     *
-     * @param port
-     * @param clientPort
-     */
     public TCPCommunicator(int aPort, int aClientPort){
         clients.add(new Client(aClientPort));
         
@@ -77,9 +72,9 @@ public class TCPCommunicator extends AbstractCommunicator{
         notifyMessageReceived(aMessage);
     }
     
-    private Client getClientForSystemId(int aSystemId){
+    private Client getClientForSystemId(String aSystemId){
         for (Client client : clients) {
-            if (client.getSystemId() == aSystemId) {
+            if (client.getSystemId().equals(aSystemId)) {
                 return client;
             }
         }

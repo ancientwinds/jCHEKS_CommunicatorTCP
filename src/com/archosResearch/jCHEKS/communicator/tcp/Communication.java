@@ -10,22 +10,22 @@ package com.archosResearch.jCHEKS.communicator.tcp;
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public class Communication {
-    private int systemId;
+    private String systemId;
     private String chipher;
     private String chiperCheck;
     
     public Communication(String aChipher)
     {   
-        this(aChipher, "Temp", 1);
+        this(aChipher, "Temp", "TempId");
     }
     
-    public Communication(String aChipher, String aChipherCheck, int aSystemId){
+    public Communication(String aChipher, String aChipherCheck, String aSystemId){
         this.chipher = aChipher;
         this.chiperCheck = aChipherCheck;
         this.systemId = aSystemId;
     }
     
-    public int getSystemId() {
+    public String getSystemId() {
         
         return this.systemId;
     }
