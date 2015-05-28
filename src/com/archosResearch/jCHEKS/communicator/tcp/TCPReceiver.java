@@ -7,20 +7,24 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHECKS.Engine.Engine;
 import com.archosResearch.jCHEKS.communicator.CommunicatorObservable;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public class TCPReceiver extends CommunicatorObservable{
+public class TCPReceiver extends CommunicatorObservable implements Runnable{
     private static TCPReceiver instance = null;
     
-    private Thread listenThread;
-    
-    protected TCPReceiver(){
-        this.listenThread = new Thread(new ListeningThread(9000, this));
-        this.listenThread.start();
-    }
+    private final int port = 9001;
+    private ServerSocket listeningSocket;
+    private boolean running = true;
     
     public static void start(Engine engine){
         if(instance == null){
@@ -29,8 +33,30 @@ public class TCPReceiver extends CommunicatorObservable{
         }
     }
     
-    public void receivingCommunication(String message){
-        System.out.println("Received message: " + message);
-        notifyMessageReceived(message);
+    public static TCPReceiver getInstance(){
+        return instance;
     }
+
+    @Override
+    public void run() {
+       try {
+            listeningSocket = new ServerSocket(this.port);
+            
+            while(running) {
+                Socket client = listeningSocket.accept();
+                System.out.println("Receiving communication...");                
+                
+                DataInputStream dataIn = new DataInputStream(client.getInputStream());
+                DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
+
+                notifyMessageReceived(dataIn.readUTF());
+                System.out.println("Sending ACK...");
+                
+                dataOut.writeUTF("I received your message");
+            }                
+            
+            listeningSocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+        }    }
 }

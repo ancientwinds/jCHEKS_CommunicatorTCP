@@ -20,18 +20,17 @@ public class Engine implements CommunicatorObserver{
     private static AbstractCommunicator communicator;
     
     public Engine(){
-        communicator = new TCPCommunicator("127.0.0.1", 9001, this);
-        communicator.addObserver(this);
+        communicator = new TCPCommunicator("127.0.0.1", 9000, this);
     }
 
     @Override
     public void messageReceived(String aMessage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void ackReceived() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public static void main(String[] args) {

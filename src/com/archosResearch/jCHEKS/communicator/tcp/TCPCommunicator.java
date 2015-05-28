@@ -21,17 +21,14 @@ import java.util.logging.Logger;
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public class TCPCommunicator extends AbstractCommunicator{
-
-    public TCPCommunicator(int aPort, int aClientPort){
-        
-       
-    }
     
     public TCPCommunicator(String ipAdress, int port, Engine engine){
         this.ipAddress = ipAdress;
         this.port = port;
-        this.addObserver(engine);
+        //this.addObserver(engine);
         TCPReceiver.start(engine);
+        new Thread(TCPReceiver.getInstance()).start();
+        
     }
     
     @Override
@@ -63,9 +60,6 @@ public class TCPCommunicator extends AbstractCommunicator{
             return false;
         }  
         
-        return true;
-        
-    }
-
-    
+        return true;        
+    }    
 }
