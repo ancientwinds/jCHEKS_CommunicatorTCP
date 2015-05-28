@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.archosResearch.jCHEKS.communicator.tcp;
+package com.archosResearch.jCHEKS.communicator;
+
+import com.archosResearch.jCHEKS.communicator.tcp.Communication;
 
 /**
  *
