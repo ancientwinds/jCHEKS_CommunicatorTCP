@@ -15,10 +15,14 @@ public class Client {
     private int port;
     private int systemId;
     
-    public Client(int port){
-        this.ipAddress = "127.0.0.1";
-        this.port = port;
-        this.systemId = 1;
+    public Client(int aPort){
+        this(aPort, "127.0.0.1", 1);
+    }
+    
+    public Client(int aPort, String aIp, int aSystemId){
+        this.ipAddress = aIp;
+        this.port = aPort;
+        this.systemId = aSystemId;
     }
     
     public String getIpAddress(){
@@ -42,4 +46,5 @@ public class Client {
         
         return sb.toString();
     }
+
 }

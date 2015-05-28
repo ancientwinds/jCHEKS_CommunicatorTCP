@@ -13,6 +13,6 @@ public abstract class CommunicatorObserver {
     
     public abstract void update();
     
-    public abstract void messageReceived(String message);
+    public abstract void messageReceived(String aMessage);
     public abstract void ackReceived();
 }

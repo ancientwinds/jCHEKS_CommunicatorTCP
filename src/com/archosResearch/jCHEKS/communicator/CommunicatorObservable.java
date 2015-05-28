@@ -16,13 +16,13 @@ public class CommunicatorObservable {
     
     private List<CommunicatorObserver> observers = new ArrayList<CommunicatorObserver>();
     
-    public void addObserver(CommunicatorObserver observer){
-        this.observers.add(observer);
+    public void addObserver(CommunicatorObserver aObserver){
+        this.observers.add(aObserver);
     }
     
-    public void notifyMessageReceived(String message){
+    public void notifyMessageReceived(String aMessage){
         for(CommunicatorObserver observer: this.observers){
-            observer.messageReceived(message);
+            observer.messageReceived(aMessage);
         }
     }
     

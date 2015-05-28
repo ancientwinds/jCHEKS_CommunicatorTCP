@@ -25,9 +25,9 @@ public class ListeningThread implements Runnable{
     private ServerSocket listeningSocket;
     private boolean running = true;
     
-    public ListeningThread(int port, AbstractCommunicator communicator){
-        this.port = port;
-        this.communicator = communicator;
+    public ListeningThread(int aPort, AbstractCommunicator aCommunicator){
+        this.port = aPort;
+        this.communicator = aCommunicator;
     }
     
      @Override

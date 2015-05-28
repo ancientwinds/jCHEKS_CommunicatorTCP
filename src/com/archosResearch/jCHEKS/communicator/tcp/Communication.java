@@ -14,11 +14,15 @@ public class Communication {
     private String chipher;
     private String chiperCheck;
     
-    public Communication(String chiper)
-    {        
-        this.systemId = 1;
-        this.chipher = chiper;
-        this.chiperCheck = "fdsdDS";
+    public Communication(String aChipher)
+    {   
+        this(aChipher, "Temp", 1);
+    }
+    
+    public Communication(String aChipher, String aChipherCheck, int aSystemId){
+        this.chipher = aChipher;
+        this.chiperCheck = aChipherCheck;
+        this.systemId = aSystemId;
     }
     
     public int getSystemId() {

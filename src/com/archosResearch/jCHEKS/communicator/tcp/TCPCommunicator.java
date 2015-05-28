@@ -24,16 +24,21 @@ public class TCPCommunicator extends AbstractCommunicator{
 
     private ArrayList<Client> clients = new ArrayList<>();
     
-    public TCPCommunicator(int port, int clientPort){
-        clients.add(new Client(clientPort));
+    /**
+     *
+     * @param port
+     * @param clientPort
+     */
+    public TCPCommunicator(int aPort, int aClientPort){
+        clients.add(new Client(aClientPort));
         
-        this.listenThread = new Thread(new ListeningThread(port, this));
+        this.listenThread = new Thread(new ListeningThread(aPort, this));
         this.listenThread.start();
     }
     
     @Override
-    public boolean sendCommunication(Communication communication) {
-        Client destinationClient = getClientForSystemId(communication.getSystemId());
+    public boolean sendCommunication(Communication aCommunication) {
+        Client destinationClient = getClientForSystemId(aCommunication.getSystemId());
         
         try {
             System.out.println("Attempting to connect to " + destinationClient.getConnectionInfo());
@@ -45,7 +50,7 @@ public class TCPCommunicator extends AbstractCommunicator{
             DataOutputStream dataOutToDestination = new DataOutputStream(outToDestination);
             
             System.out.println("Sending communication to destination...");
-            dataOutToDestination.writeUTF(communication.getChipher());
+            dataOutToDestination.writeUTF(aCommunication.getChipher());
             
             System.out.println("Waiting for ACK");
             InputStream inFromDestination = clientSocket.getInputStream();
@@ -66,21 +71,27 @@ public class TCPCommunicator extends AbstractCommunicator{
     }
     
     @Override
-    public void receivingCommunication(String message)
+    public void receivingCommunication(String aMessage)
     {
-        System.out.print("Received message: " + message);
-        notifyMessageReceived(message);
+        System.out.print("Received message: " + aMessage);
+        notifyMessageReceived(aMessage);
     }
     
-    private Client getClientForSystemId(int systemId){
+    private Client getClientForSystemId(int aSystemId){
         for (Client client : clients) {
-            if (client.getSystemId() == systemId) {
+            if (client.getSystemId() == aSystemId) {
                 return client;
             }
         }
         
         //TODO Remove null and add an exception.
         return null;
+    }
+    
+    public void addClient(Client aClient){
+        if(clients != null){
+            clients.add(aClient);
+        }
     }
 
    

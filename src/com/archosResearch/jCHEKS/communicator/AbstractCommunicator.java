@@ -16,6 +16,6 @@ public abstract class AbstractCommunicator extends CommunicatorObservable{
     //TODO do not use the Java Observable mechanism, build our own instead so it will be tailored to our needs. 
     protected Thread listenThread;
     
-    public abstract boolean sendCommunication(Communication communication);
-    public abstract void receivingCommunication(String message);
+    public abstract boolean sendCommunication(Communication aCommunication);
+    public abstract void receivingCommunication(String aMessage);
 }
