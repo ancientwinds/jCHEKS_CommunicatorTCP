@@ -21,13 +21,13 @@ import java.util.logging.Logger;
 public class ListeningThread implements Runnable{
     
     private int port;
-    private AbstractCommunicator communicator;
+    private TCPReceiver receiver;
     private ServerSocket listeningSocket;
     private boolean running = true;
-    
-    public ListeningThread(int aPort, AbstractCommunicator aCommunicator){
+   
+    public ListeningThread(int aPort, TCPReceiver receiver){
         this.port = aPort;
-        this.communicator = aCommunicator;
+        this.receiver = receiver;
     }
     
      @Override
@@ -42,7 +42,7 @@ public class ListeningThread implements Runnable{
                 DataInputStream dataIn = new DataInputStream(client.getInputStream());
                 DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
 
-                this.communicator.receivingCommunication(dataIn.readUTF());
+                this.receiver.receivingCommunication(dataIn.readUTF());
                 System.out.println("Sending ACK...");
                 
                 dataOut.writeUTF("I received your message");

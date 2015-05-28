@@ -14,9 +14,12 @@ public class Communication {
     private String chipher;
     private String chiperCheck;
     
-    public Communication(String aChipher)
+    public Communication(String communication)
     {   
-        this(aChipher, "Temp", "tempId");
+        String[] communicationElements = communication.split("~");
+        this.chipher = communicationElements[0];
+        this.chiperCheck = communicationElements[1];
+        this.systemId = communicationElements[2];
     }
     
     public Communication(String aChipher, String aChipherCheck, String aSystemId){
@@ -37,5 +40,16 @@ public class Communication {
     public String getChipherCheck()
     {
         return this.chiperCheck;
+    }
+    
+    public String getCommunicationString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.chipher);
+        sb.append("~");
+        sb.append(this.chiperCheck);
+        sb.append("~");
+        sb.append(this.systemId);
+        
+        return sb.toString();
     }
 }

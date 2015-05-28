@@ -9,10 +9,8 @@ package com.archosResearch.jCHEKS.communicator;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public abstract class CommunicatorObserver {
-    
-    public abstract void update();
-    
-    public abstract void messageReceived(String aMessage);
-    public abstract void ackReceived();
+public  interface CommunicatorObserver {
+        
+    public  void messageReceived(String aMessage);
+    public  void ackReceived();
 }

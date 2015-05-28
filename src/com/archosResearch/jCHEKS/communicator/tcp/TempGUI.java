@@ -5,6 +5,7 @@
  */
 package com.archosResearch.jCHEKS.communicator.tcp;
 
+import com.archosResearch.jCHEKS.communicator.AbstractCommunicator;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -21,14 +22,13 @@ import javax.swing.JTextField;
 public class TempGUI extends JFrame{
     
     private JTextField text = new JTextField();
-    private TCPCommunicator communicator = null;
-    public TempGUI(){
+    private AbstractCommunicator communicator = null;
+    public TempGUI(AbstractCommunicator comm){
+        communicator = comm;
         setSize(600, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        JButton createCommunicator = new JButton("Create communicator");
-        createCommunicator.addActionListener(new createHandler());
         JButton sendMessage = new JButton("Send message");
         sendMessage.addActionListener(new sendHandler());
         
@@ -37,28 +37,19 @@ public class TempGUI extends JFrame{
         JPanel panel = new JPanel();
         
         panel.setLayout(new GridLayout(1, 3));
-        panel.add(createCommunicator);
         panel.add(sendMessage);
         panel.add(text);
         this.add(panel, BorderLayout.CENTER);
         this.revalidate();
 
     }
-    
-    private class createHandler implements ActionListener{
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String[] ports = text.getText().split(",");
-        communicator = new TCPCommunicator(Integer.parseInt(ports[0]), Integer.parseInt(ports[1]));
-        }
-    }
     
     private class sendHandler implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-        communicator.sendCommunication(new Communication(text.getText()));
+        communicator.sendCommunication(new Communication(text.getText(), "TEMP", "TEMP@"));
         }
     }
 
