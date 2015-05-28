@@ -16,7 +16,7 @@ public class Communication {
     
     public Communication(String aChipher)
     {   
-        this(aChipher, "Temp", "TempId");
+        this(aChipher, "Temp", "tempId");
     }
     
     public Communication(String aChipher, String aChipherCheck, String aSystemId){

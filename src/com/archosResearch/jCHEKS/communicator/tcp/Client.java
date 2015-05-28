@@ -16,10 +16,11 @@ public class Client {
     private String systemId;
     
     public Client(int aPort){
-        this(aPort, "127.0.0.1", "tempID");
+        this(aPort, "127.0.0.1", "tempId");
     }
     
     public Client(int aPort, String aIp, String aSystemId){
+        System.out.println("Creating a client with all params");
         this.ipAddress = aIp;
         this.port = aPort;
         this.systemId = aSystemId;

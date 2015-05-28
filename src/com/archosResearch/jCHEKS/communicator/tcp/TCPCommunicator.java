@@ -68,13 +68,13 @@ public class TCPCommunicator extends AbstractCommunicator{
     @Override
     public void receivingCommunication(String aMessage)
     {
-        System.out.print("Received message: " + aMessage);
+        System.out.println("Received message: " + aMessage);
         notifyMessageReceived(aMessage);
     }
     
     private Client getClientForSystemId(String aSystemId){
         for (Client client : clients) {
-            if (client.getSystemId().equals(aSystemId)) {
+            if (aSystemId.equals(client.getSystemId())) {
                 return client;
             }
         }
