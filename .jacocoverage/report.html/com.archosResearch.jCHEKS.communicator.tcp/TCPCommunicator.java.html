@@ -21,7 +21,7 @@ public class TCPCommunicator extends AbstractCommunicator{
 
 <span class="fc" id="L22">        this.sender = new TCPSender(ipAddress, port, this);</span>
         
-<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if(TCPReceiver.start(engine)){            </span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if(TCPReceiver.start(engine)){            </span>
 <span class="fc" id="L25">            new Thread(TCPReceiver.getInstance()).start();</span>
         }  
         
@@ -34,8 +34,9 @@ public class TCPCommunicator extends AbstractCommunicator{
 <span class="nc" id="L34">        return this.sender.sendCommunication(communication);</span>
     }  
     
+    @Override
     public void ackReceived(){
-<span class="nc" id="L38">        notifyMessageACK();</span>
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L39">        notifyMessageACK();</span>
+<span class="nc" id="L40">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

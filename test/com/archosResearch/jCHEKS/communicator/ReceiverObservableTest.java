@@ -5,18 +5,17 @@
  */
 package com.archosResearch.jCHEKS.communicator;
 
-import com.archosResearch.jCHECKS.Engine.Engine;
 import com.archosResearch.jCHECKS.Engine.MockEngine;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author Thomas Lepage thomas.lepage@hotmail.ca
+ * @author Thomas Lepage
  */
 public class ReceiverObservableTest {
 
-    private static String message = "Test message";
+    private static final String message = "Test message";
 
     /**
      * Test of notifyMessageReceived method, of class ReceiverObservable.

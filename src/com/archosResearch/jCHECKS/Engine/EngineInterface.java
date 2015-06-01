@@ -10,7 +10,7 @@ import com.archosResearch.jCHEKS.communicator.ReceiverObserver;
 
 /**
  *
- * @author Thomas Lepage thomas.lepage@hotmail.ca
+ * @author Thomas Lepage
  */
 public abstract class EngineInterface implements CommunicatorObserver, ReceiverObserver {
     

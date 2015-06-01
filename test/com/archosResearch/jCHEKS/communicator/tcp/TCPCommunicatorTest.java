@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Thomas Lepage thomas.lepage@hotmail.ca
+ * @author Thomas Lepage
  */
 public class TCPCommunicatorTest {
     
@@ -24,6 +24,12 @@ public class TCPCommunicatorTest {
         
         assertNotNull(instance);
     }
-
+    
+    @Test
+    public void test_TCPCommunicator_second_instance() {
+        TCPCommunicator instance = new TCPCommunicator("127.0.0.1", 9002, new Engine());
+        
+        assertNotNull(instance);
+    }
 
 }

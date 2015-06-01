@@ -27,13 +27,13 @@ import java.util.logging.Logger;
 <span class="fc" id="L27">    private boolean running = true;</span>
     
     public static boolean start(Engine engine){
-<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if(instance == null){</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if(instance == null){</span>
 <span class="fc" id="L31">            instance = new TCPReceiver();</span>
 <span class="fc" id="L32">            instance.addObserver(engine);</span>
 <span class="fc" id="L33">            return true;</span>
         }
         
-<span class="nc" id="L36">        return false;</span>
+<span class="fc" id="L36">        return false;</span>
     }
     
     public static TCPReceiver getInstance(){

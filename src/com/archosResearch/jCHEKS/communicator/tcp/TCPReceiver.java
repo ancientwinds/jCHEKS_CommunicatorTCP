@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Thomas Lepage thomas.lepage@hotmail.ca
+ * @author Thomas Lepage
  */
 public class TCPReceiver extends ReceiverObservable implements Runnable{
     private static TCPReceiver instance = null;

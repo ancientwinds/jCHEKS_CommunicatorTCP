@@ -17,14 +17,14 @@ public class Engine extends EngineInterface{
     
     @Override
     public void messageReceived(String message) {
+        //TODO Temporary method.
         System.out.println("Message received: " + message);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void ackReceived() {
+        //TODO Temporary method.
         System.out.println("ACK received");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public static void main(String[] args) {

@@ -7,7 +7,7 @@ package com.archosResearch.jCHECKS.Engine;
 
 /**
  *
- * @author Thomas Lepage thomas.lepage@hotmail.ca
+ * @author Thomas Lepage
  */
 public class MockEngine extends EngineInterface{
     

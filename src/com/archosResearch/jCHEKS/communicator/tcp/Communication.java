@@ -7,12 +7,12 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 
 /**
  *
- * @author Thomas Lepage thomas.lepage@hotmail.ca
+ * @author Thomas Lepage
  */
 public class Communication {
-    private String systemId;
-    private String chipher;
-    private String chiperCheck;
+    private final String systemId;
+    private final String chipher;
+    private final String chiperCheck;
     
     public Communication(String communication)
     {   
