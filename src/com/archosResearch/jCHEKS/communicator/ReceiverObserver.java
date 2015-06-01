@@ -9,6 +9,7 @@ package com.archosResearch.jCHEKS.communicator;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public interface CommunicatorObserver {
-    public  void ackReceived();
+public interface ReceiverObserver {
+        
+    public  void messageReceived(String aMessage);
 }

@@ -6,7 +6,7 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHECKS.Engine.Engine;
-import com.archosResearch.jCHEKS.communicator.CommunicatorObservable;
+import com.archosResearch.jCHEKS.communicator.ReceiverObservable;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -19,22 +19,29 @@ import java.util.logging.Logger;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public class TCPReceiver extends CommunicatorObservable implements Runnable{
+public class TCPReceiver extends ReceiverObservable implements Runnable{
     private static TCPReceiver instance = null;
     
     private final int port = 9001;
     private ServerSocket listeningSocket;
     private boolean running = true;
     
-    public static void start(Engine engine){
+    public static boolean start(Engine engine){
         if(instance == null){
             instance = new TCPReceiver();
             instance.addObserver(engine);
+            return true;
         }
+        
+        return false;
     }
     
     public static TCPReceiver getInstance(){
         return instance;
+    }
+    
+    public void stopReceiver(){
+        this.running = false;
     }
 
     @Override
@@ -58,5 +65,6 @@ public class TCPReceiver extends CommunicatorObservable implements Runnable{
             listeningSocket.close();
         } catch (IOException ex) {
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
-        }    }
+        }
+    }
 }

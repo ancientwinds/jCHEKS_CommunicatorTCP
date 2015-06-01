@@ -7,35 +7,33 @@ package com.archosResearch.jCHECKS.Engine;
 
 import com.archosResearch.jCHEKS.communicator.AbstractCommunicator;
 import com.archosResearch.jCHEKS.communicator.CommunicatorObserver;
+import com.archosResearch.jCHEKS.communicator.ReceiverObserver;
 import com.archosResearch.jCHEKS.communicator.tcp.TCPCommunicator;
 import com.archosResearch.jCHEKS.communicator.tcp.TempGUI;
 import java.awt.EventQueue;
 
 /**
  *
- * @author Thomas Lepage thomas.lepage@hotmail.ca
+ * @author Thomas Lepage
  */
-public class Engine implements CommunicatorObserver{
+public class Engine implements CommunicatorObserver, ReceiverObserver{
     
-    private static AbstractCommunicator communicator;
-    
-    public Engine(){
-        communicator = new TCPCommunicator("127.0.0.1", 9000, this);
-    }
-
     @Override
-    public void messageReceived(String aMessage) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void messageReceived(String message) {
+        System.out.println("Message received: " + message);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void ackReceived() {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("ACK received");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public static void main(String[] args) {
-
+        
         Engine engine = new Engine();
+        TCPCommunicator communicator = new TCPCommunicator("127.0.0.1", 9000, engine);
         //TODO Temporary UI for testing.
         EventQueue.invokeLater(new Runnable() {
 

@@ -15,36 +15,15 @@ import static org.junit.Assert.*;
  */
 public class TCPCommunicatorTest {
     
-    public TCPCommunicatorTest() {
+    /**
+     * Test of the constructor, of class TCPCommunicator.
+     */
+    @Test
+    public void test_TCPCommunicator_constructor() {
+        TCPCommunicator instance = new TCPCommunicator("127.0.0.1", 9000, new Engine());
+        
+        assertNotNull(instance);
     }
 
-    /**
-     * Test of sendCommunication method, of class TCPCommunicator.
-     */
-    /*@Test
-    public void testSendCommunication() {
-        System.out.println("sendCommunication");
-        Communication communication = new Communication("Test de communication");
-        TCPCommunicator sendingCommunicator = new TCPCommunicator("127.0.0.1" , 9000, new Engine());
-        TCPCommunicator receivingCommunicator = new TCPCommunicator(9001, 9000);
-
-        boolean expResult = true;
-        boolean result = sendingCommunicator.sendCommunication(communication);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    }*/
-
-    /**
-     * Test of receivingCommunication method, of class TCPCommunicator.
-     */
-    /*@Test
-    public void testReceivingCommunication() {
-        System.out.println("receivingCommunication");
-        String message = "";
-        TCPCommunicator instance = null;
-        instance.receivingCommunication(message);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
 
 }

@@ -12,17 +12,17 @@ import java.util.List;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public class CommunicatorObservable {
+public class ReceiverObservable {
     
-    private final List<CommunicatorObserver> observers = new ArrayList<>();
+    private final List<ReceiverObserver> observers = new ArrayList<>();
     
-    public void addObserver(CommunicatorObserver observer){
+    public void addObserver(ReceiverObserver observer){
         this.observers.add(observer);
     }
     
-    public void notifyMessageACK(){
-        for(CommunicatorObserver observer: this.observers){
-            observer.ackReceived();
+    public void notifyMessageReceived(String message){
+        for(ReceiverObserver observer: this.observers){
+            observer.messageReceived(message);
         }
     }
 }
