@@ -19,7 +19,7 @@ public class CommunicatorObservableTest {
      * Test of notifyMessageACK method, of class CommunicatorObservable.
      */
     @Test
-    public void testNotifyMessageACK() {
+    public void test_notifyMessageACK() {
         MockEngine engine = new MockEngine();
         SenderObservable instance = new SenderObservable();
         instance.addObserver(engine);

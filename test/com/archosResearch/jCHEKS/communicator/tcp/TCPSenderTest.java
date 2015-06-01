@@ -19,7 +19,7 @@ public class TCPSenderTest {
      * Test of the constructor, of class TCPSender.
      */
     @Test
-    public void testSendCommunication() {
+    public void test_TCPSender() {
         TCPSender sender = new TCPSender("127.0.0.1", 9000);
         
         assertNotNull(sender);
