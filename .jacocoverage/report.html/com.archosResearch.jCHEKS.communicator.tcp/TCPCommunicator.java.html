@@ -21,7 +21,7 @@ public class TCPCommunicator extends AbstractCommunicator{
 
 <span class="fc" id="L22">        this.sender = new TCPSender(ipAddress, port, this);</span>
         
-<span class="fc bfc" id="L24" title="All 2 branches covered.">        if(TCPReceiver.start(engine)){            </span>
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if(TCPReceiver.start(engine)){            </span>
 <span class="fc" id="L25">            new Thread(TCPReceiver.getInstance()).start();</span>
         }  
         

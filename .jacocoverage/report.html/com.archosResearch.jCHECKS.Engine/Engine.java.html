@@ -5,7 +5,6 @@
  */
 package com.archosResearch.jCHECKS.Engine;
 
-import com.archosResearch.jCHEKS.communicator.AbstractCommunicator;
 import com.archosResearch.jCHEKS.communicator.CommunicatorObserver;
 import com.archosResearch.jCHEKS.communicator.ReceiverObserver;
 import com.archosResearch.jCHEKS.communicator.tcp.TCPCommunicator;
@@ -16,37 +15,34 @@ import java.awt.EventQueue;
  *
  * @author Thomas Lepage
  */
-public class Engine implements CommunicatorObserver, ReceiverObserver{
+<span class="fc" id="L18">public class Engine implements CommunicatorObserver, ReceiverObserver{</span>
     
-    private static AbstractCommunicator communicator;
-    
-<span class="fc" id="L23">    public Engine(){</span>
-<span class="fc" id="L24">        communicator = new TCPCommunicator(&quot;127.0.0.1&quot;, 9000, this);</span>
-<span class="fc" id="L25">    }</span>
-
     @Override
-    public void messageReceived(String aMessage) {
-<span class="nc" id="L29">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    public void messageReceived(String message) {
+<span class="nc" id="L22">        System.out.println(&quot;Message received: &quot; + message);</span>
+<span class="nc" id="L23">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
 
     @Override
     public void ackReceived() {
-<span class="nc" id="L34">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+<span class="nc" id="L28">        System.out.println(&quot;ACK received&quot;);</span>
+<span class="nc" id="L29">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
     
     public static void main(String[] args) {
-
-<span class="nc" id="L39">        Engine engine = new Engine();</span>
+        
+<span class="nc" id="L34">        Engine engine = new Engine();</span>
+<span class="nc" id="L35">        TCPCommunicator communicator = new TCPCommunicator(&quot;127.0.0.1&quot;, 9000, engine);</span>
         //TODO Temporary UI for testing.
-<span class="nc" id="L41">        EventQueue.invokeLater(new Runnable() {</span>
+<span class="nc" id="L37">        EventQueue.invokeLater(new Runnable() {</span>
 
             @Override
             public void run() {
-<span class="nc" id="L45">                TempGUI ex = new TempGUI(communicator);</span>
-<span class="nc" id="L46">                ex.setVisible(true);</span>
-<span class="nc" id="L47">            }</span>
+<span class="nc" id="L41">                TempGUI ex = new TempGUI(communicator);</span>
+<span class="nc" id="L42">                ex.setVisible(true);</span>
+<span class="nc" id="L43">            }</span>
         });
-<span class="nc" id="L49">    } </span>
+<span class="nc" id="L45">    } </span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

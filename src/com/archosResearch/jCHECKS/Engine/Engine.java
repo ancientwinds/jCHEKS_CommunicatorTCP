@@ -5,9 +5,6 @@
  */
 package com.archosResearch.jCHECKS.Engine;
 
-import com.archosResearch.jCHEKS.communicator.AbstractCommunicator;
-import com.archosResearch.jCHEKS.communicator.CommunicatorObserver;
-import com.archosResearch.jCHEKS.communicator.ReceiverObserver;
 import com.archosResearch.jCHEKS.communicator.tcp.TCPCommunicator;
 import com.archosResearch.jCHEKS.communicator.tcp.TempGUI;
 import java.awt.EventQueue;
@@ -16,7 +13,7 @@ import java.awt.EventQueue;
  *
  * @author Thomas Lepage
  */
-public class Engine implements CommunicatorObserver, ReceiverObserver{
+public class Engine extends EngineInterface{
     
     @Override
     public void messageReceived(String message) {
