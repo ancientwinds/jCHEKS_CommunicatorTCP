@@ -5,8 +5,6 @@
  */
 package com.archosResearch.jCHEKS.communicator;
 
-import com.archosResearch.jCHEKS.communicator.Communication;
-
 /**
  *
  * @author Thomas Lepage
@@ -14,6 +12,6 @@ import com.archosResearch.jCHEKS.communicator.Communication;
 public abstract class AbstractCommunicator extends SenderObservable{
     //TODO eventually move this class into the Conceps project
     //TODO do not use the Java Observable mechanism, build our own instead so it will be tailored to our needs.     
-    public abstract boolean sendCommunication(Communication aCommunication);
+    public abstract void sendCommunication(Communication aCommunication);
     
 }

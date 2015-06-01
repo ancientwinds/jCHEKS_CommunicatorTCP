@@ -16,9 +16,8 @@ public class MockTCPSender extends ITCPSender{
     private boolean communicationSent = false;
     
     @Override
-    public boolean sendCommunication(Communication communication) {
+    public void sendCommunication(Communication communication) {
         this.communicationSent = true;
-        return true;
     }
     
     public boolean isCommunicationSent() {

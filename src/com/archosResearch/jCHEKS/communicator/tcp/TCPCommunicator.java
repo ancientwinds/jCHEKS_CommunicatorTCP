@@ -8,6 +8,8 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 import com.archosResearch.jCHEKS.communicator.AbstractCommunicator;
 import com.archosResearch.jCHEKS.communicator.Communication;
 import com.archosResearch.jCHEKS.Engine.Engine;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,7 +30,11 @@ public class TCPCommunicator extends AbstractCommunicator{
     }
     
     @Override
-    public boolean sendCommunication(Communication communication) {
-        return this.sender.sendCommunication(communication);
+    public void sendCommunication(Communication communication) {
+        try {
+            this.sender.sendCommunication(communication);
+        } catch (TCPSocketException ex) {
+            Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }  
 }

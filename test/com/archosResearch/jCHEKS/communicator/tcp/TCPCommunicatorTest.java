@@ -40,4 +40,6 @@ public class TCPCommunicatorTest {
 
        assertTrue(sender.isCommunicationSent());
     }
+    
+    
 }

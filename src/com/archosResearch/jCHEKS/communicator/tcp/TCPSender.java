@@ -30,7 +30,7 @@ public class TCPSender extends ITCPSender{
     }
     
     @Override
-    public boolean sendCommunication(Communication communication) {
+    public void sendCommunication(Communication communication) throws TCPSocketException{
         try {
             //System.out.println("Attempting to connect to " + destinationClient.getConnectionInfo());
             Socket clientSocket = new Socket(this.ipAddress, this.port);
@@ -55,9 +55,7 @@ public class TCPSender extends ITCPSender{
         } catch (IOException ex) {
             System.out.println("Could not create socket to the destination client.");
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            throw new TCPSocketException();
         }  
-        
-        return true;  
     }
 }

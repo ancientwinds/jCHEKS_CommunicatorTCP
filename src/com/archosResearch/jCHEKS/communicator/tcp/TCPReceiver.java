@@ -56,7 +56,7 @@ public class TCPReceiver extends ITCPReceiver implements Runnable{
             
             listeningSocket.close();
         } catch (IOException ex) {
-            Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex); 
         }
     }
 }
