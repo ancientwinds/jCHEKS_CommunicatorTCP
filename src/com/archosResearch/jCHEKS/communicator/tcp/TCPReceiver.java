@@ -5,8 +5,8 @@
  */
 package com.archosResearch.jCHEKS.communicator.tcp;
 
-import com.archosResearch.jCHECKS.Engine.Engine;
 import com.archosResearch.jCHEKS.communicator.ReceiverObservable;
+import com.archosResearch.jCHEKS.Engine.Engine;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

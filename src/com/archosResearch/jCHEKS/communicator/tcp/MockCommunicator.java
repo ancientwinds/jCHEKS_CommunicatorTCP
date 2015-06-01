@@ -6,6 +6,7 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.AbstractCommunicator;
+import com.archosResearch.jCHEKS.communicator.Communication;
 
 /**
  *

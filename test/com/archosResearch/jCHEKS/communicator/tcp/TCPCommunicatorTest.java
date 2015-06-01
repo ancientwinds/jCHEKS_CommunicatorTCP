@@ -5,7 +5,8 @@
  */
 package com.archosResearch.jCHEKS.communicator.tcp;
 
-import com.archosResearch.jCHECKS.Engine.Engine;
+import com.archosResearch.jCHEKS.Engine.Engine;
+import com.archosResearch.jCHEKS.communicator.tcp.TCPCommunicator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
