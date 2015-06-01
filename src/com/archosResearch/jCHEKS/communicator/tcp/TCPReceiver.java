@@ -19,24 +19,18 @@ import java.util.logging.Logger;
  *
  * @author Thomas Lepage
  */
-public class TCPReceiver extends ReceiverObservable implements Runnable{
+public class TCPReceiver extends ITCPReceiver implements Runnable{
     private static TCPReceiver instance = null;
     
     private final int port = 9001;
     private ServerSocket listeningSocket;
-    private boolean running = true;
-    
-    public static boolean start(Engine engine){
-        if(instance == null){
-            instance = new TCPReceiver();
-            instance.addObserver(engine);
-            return true;
-        }
-        
-        return false;
-    }
+    private boolean running = true;   
     
     public static TCPReceiver getInstance(){
+        if(instance == null){
+            instance = new TCPReceiver();
+            new Thread(instance).start();
+        }
         return instance;
     }
     

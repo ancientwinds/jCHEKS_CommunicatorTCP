@@ -5,13 +5,13 @@
  */
 package com.archosResearch.jCHEKS.Engine;
 
-import com.archosResearch.jCHEKS.communicator.CommunicatorObserver;
+import com.archosResearch.jCHEKS.communicator.SenderObserver;
 import com.archosResearch.jCHEKS.communicator.ReceiverObserver;
 
 /**
  *
  * @author Thomas Lepage
  */
-public abstract class EngineInterface implements CommunicatorObserver, ReceiverObserver {
+public abstract class EngineInterface implements SenderObserver, ReceiverObserver {
     
 }

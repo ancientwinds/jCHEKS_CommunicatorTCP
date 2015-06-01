@@ -12,16 +12,16 @@ import java.util.List;
  *
  * @author Thomas Lepage
  */
-public class CommunicatorObservable {
+public class SenderObservable {
     
-    private final List<CommunicatorObserver> observers = new ArrayList<>();
+    private final List<SenderObserver> observers = new ArrayList<>();
     
-    public void addObserver(CommunicatorObserver observer){
+    public void addObserver(SenderObserver observer){
         this.observers.add(observer);
     }
     
     public void notifyMessageACK(){
-        for(CommunicatorObserver observer: this.observers){
+        for(SenderObserver observer: this.observers){
             observer.ackReceived();
         }
     }

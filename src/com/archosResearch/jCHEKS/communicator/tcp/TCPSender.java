@@ -19,18 +19,17 @@ import java.util.logging.Logger;
  *
  * @author Thomas Lepage
  */
-public class TCPSender {
+public class TCPSender extends ITCPSender{
     
     private final String ipAddress;
     private final int port;
-    private final TCPCommunicator communicator;
     
-    public TCPSender(String ipAddress, int port, TCPCommunicator communicator) {
+    public TCPSender(String ipAddress, int port) {
         this.ipAddress = ipAddress;
         this.port = port;
-        this.communicator = communicator;
     }
     
+    @Override
     public boolean sendCommunication(Communication communication) {
         try {
             //System.out.println("Attempting to connect to " + destinationClient.getConnectionInfo());
@@ -48,7 +47,7 @@ public class TCPSender {
             InputStream inFromDestination = clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
             
-            this.communicator.ackReceived();
+            notifyMessageACK();
             
             System.out.println("From dest: " + dataInFromDestination.readUTF());
             

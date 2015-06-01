@@ -6,7 +6,7 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.Engine.Engine;
-import com.archosResearch.jCHEKS.communicator.tcp.TCPCommunicator;
+import com.archosResearch.jCHEKS.communicator.Communication;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,16 +21,23 @@ public class TCPCommunicatorTest {
      */
     @Test
     public void test_TCPCommunicator_constructor() {
-        TCPCommunicator instance = new TCPCommunicator("127.0.0.1", 9000, new Engine());
+        TCPCommunicator instance = new TCPCommunicator(new MockTCPSender(), new MockTCPReceiver(), new Engine());
         
         assertNotNull(instance);
     }
     
+    /**
+     * Test of the sendCommunication method, of class TCPCommunicator.
+     */
     @Test
-    public void test_TCPCommunicator_second_instance() {
-        TCPCommunicator instance = new TCPCommunicator("127.0.0.1", 9002, new Engine());
-        
-        assertNotNull(instance);
-    }
+    public void test_sendCommunication() {
+       MockTCPSender sender = new MockTCPSender();
+       MockTCPReceiver receiver = new MockTCPReceiver();
+       TCPCommunicator instance = new TCPCommunicator(sender, receiver, new Engine());
+       Communication communication = new Communication("test", "test", "test");
+       
+       instance.sendCommunication(communication);
 
+       assertTrue(sender.isCommunicationSent());
+    }
 }

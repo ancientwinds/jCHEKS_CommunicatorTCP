@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.archosResearch.jCHEKS.communicator.tcp;
+package com.archosResearch.jCHEKS.TempGUI;
 
 import com.archosResearch.jCHEKS.communicator.AbstractCommunicator;
 import com.archosResearch.jCHEKS.communicator.Communication;

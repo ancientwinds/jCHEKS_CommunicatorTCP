@@ -15,28 +15,20 @@ import com.archosResearch.jCHEKS.Engine.Engine;
  */
 public class TCPCommunicator extends AbstractCommunicator{
     
-    private final TCPSender sender;
-    private final TCPReceiver receiver;
-    
-    public TCPCommunicator(String ipAddress, int port, Engine engine){
+    private final ITCPSender sender;
+    private final ITCPReceiver receiver;
+   
+    public TCPCommunicator(ITCPSender sender, ITCPReceiver receiver, Engine engine){
 
-        this.sender = new TCPSender(ipAddress, port, this);
+        this.sender = sender;
+        this.sender.addObserver(engine);
         
-        if(TCPReceiver.start(engine)){            
-            new Thread(TCPReceiver.getInstance()).start();
-        }  
-        
-        this.receiver = TCPReceiver.getInstance();
-        
+        this.receiver = receiver;
+        this.receiver.addObserver(engine);
     }
     
     @Override
-    public boolean sendCommunication(Communication communication) {        
+    public boolean sendCommunication(Communication communication) {
         return this.sender.sendCommunication(communication);
     }  
-    
-    @Override
-    public void ackReceived(){
-        notifyMessageACK();
-    }
 }

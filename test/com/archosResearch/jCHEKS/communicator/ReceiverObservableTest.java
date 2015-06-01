@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.archosResearch.jCHECKS.communicator;
+package com.archosResearch.jCHEKS.communicator;
 
-import com.archosResearch.jCHEKS.communicator.ReceiverObservable;
 import com.archosResearch.jCHEKS.Engine.MockEngine;
 import org.junit.Test;
 import static org.junit.Assert.*;

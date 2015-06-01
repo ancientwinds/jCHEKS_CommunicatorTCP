@@ -18,10 +18,5 @@ public class MockCommunicator extends AbstractCommunicator{
     public boolean sendCommunication(Communication aCommunication) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public void ackReceived() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }
