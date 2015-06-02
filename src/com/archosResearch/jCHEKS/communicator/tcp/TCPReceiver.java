@@ -31,10 +31,6 @@ public class TCPReceiver extends ITCPReceiver implements Runnable{
         }
         return instance;
     }
-    
-    public void stopReceiver(){
-        this.running = false;
-    }
 
     @Override
     public void run() {
