@@ -12,6 +12,7 @@ public class MockTCPSender extends ITCPSender{
 
     private boolean communicationSent = false;
     public boolean throwException = false;
+    public SenderObserver observer;
     
     @Override
     public void sendCommunication(AbstractCommunication communication) throws TCPSocketException {
@@ -27,12 +28,11 @@ public class MockTCPSender extends ITCPSender{
 
     @Override
     public void addObserver(SenderObserver observer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.observer = observer;
     }
 
     @Override
     public void notifyMessageACK() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
