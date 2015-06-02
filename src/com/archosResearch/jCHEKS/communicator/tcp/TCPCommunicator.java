@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
 import com.archosResearch.jCheks.concept.communicator.AbstractCommunicator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.archosResearch.jCheks.concept.communicator.CommunicatorException;
 
 /**
  *
@@ -22,18 +17,17 @@ public class TCPCommunicator extends AbstractCommunicator {
     public TCPCommunicator(ITCPSender sender, ITCPReceiver receiver){
 
         this.sender = sender;
-        //this.sender.addObserver(engine);
         
         this.receiver = receiver;
-        //this.receiver.addObserver(engine);
     }
     
     @Override
-    public void sendCommunication(AbstractCommunication communication) {
+    public void sendCommunication(AbstractCommunication communication) throws CommunicatorException{
         try {
             this.sender.sendCommunication(communication);
         } catch (TCPSocketException ex) {
-            Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+            throw new CommunicatorException();
         }
+
     }  
 }
