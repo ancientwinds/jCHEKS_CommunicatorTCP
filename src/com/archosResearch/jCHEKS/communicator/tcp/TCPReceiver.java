@@ -28,7 +28,10 @@ public class TCPReceiver extends ITCPReceiver implements Runnable{
     public static TCPReceiver getInstance(){
         if(instance == null){
             instance = new TCPReceiver();
-            new Thread(instance).start();
+            Thread receiverThread = new Thread(instance);
+            receiverThread.setDaemon(true);
+            receiverThread.start();
+            
         }
         return instance;
     }
@@ -58,8 +61,4 @@ public class TCPReceiver extends ITCPReceiver implements Runnable{
         }
     }
 
-    @Override
-    public void stopReceiver() {
-        this.running = false;
-    }
 }
