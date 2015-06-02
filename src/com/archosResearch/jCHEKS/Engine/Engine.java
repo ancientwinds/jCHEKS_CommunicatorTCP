@@ -34,8 +34,10 @@ public class Engine extends EngineInterface{
         
         Engine engine = new Engine();
         TCPSender sender = new TCPSender("127.0.0.1", 9000);
-       
-        AbstractCommunicator communicator = new TCPCommunicator(sender, TCPReceiver.getInstance(), engine);
+        sender.addObserver(engine);
+        TCPReceiver receiver = TCPReceiver.getInstance();
+        receiver.addObserver(engine);
+        AbstractCommunicator communicator = new TCPCommunicator(sender, receiver);
         //TODO Temporary UI for testing.
         EventQueue.invokeLater(new Runnable() {
 

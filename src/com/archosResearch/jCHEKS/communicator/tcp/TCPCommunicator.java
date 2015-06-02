@@ -7,7 +7,6 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCheks.concept.communicator.AbstractCommunicator;
 import com.archosResearch.jCheks.concept.communicator.Communication;
-import com.archosResearch.jCHEKS.Engine.Engine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,13 +19,13 @@ public class TCPCommunicator extends AbstractCommunicator {
     private final ITCPSender sender;
     private final ITCPReceiver receiver;
    
-    public TCPCommunicator(ITCPSender sender, ITCPReceiver receiver, Engine engine){
+    public TCPCommunicator(ITCPSender sender, ITCPReceiver receiver){
 
         this.sender = sender;
-        this.sender.addObserver(engine);
+        //this.sender.addObserver(engine);
         
         this.receiver = receiver;
-        this.receiver.addObserver(engine);
+        //this.receiver.addObserver(engine);
     }
     
     @Override
