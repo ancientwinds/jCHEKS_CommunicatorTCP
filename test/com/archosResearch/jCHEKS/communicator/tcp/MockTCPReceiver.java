@@ -10,5 +10,10 @@ package com.archosResearch.jCHEKS.communicator.tcp;
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public class MockTCPReceiver extends ITCPReceiver{
+
+    @Override
+    public void stopReceiver() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class TCPReceiver extends ITCPReceiver implements Runnable{
     private static TCPReceiver instance = null;
     
-    private final int port = 9000;
+    private final int port = 9001;
     private ServerSocket listeningSocket;
     private boolean running = true;   
     
@@ -56,5 +56,10 @@ public class TCPReceiver extends ITCPReceiver implements Runnable{
         } catch (IOException ex) {
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex); 
         }
+    }
+
+    @Override
+    public void stopReceiver() {
+        this.running = false;
     }
 }
