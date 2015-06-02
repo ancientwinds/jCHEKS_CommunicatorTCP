@@ -12,9 +12,6 @@ import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
  * @author Thomas Lepage
  */
 public class Communication extends AbstractCommunication{
-    private final String systemId;
-    private final String chipher;
-    private final String chiperCheck;
     
     public Communication(String communication)
     {   
@@ -24,26 +21,12 @@ public class Communication extends AbstractCommunication{
         this.systemId = communicationElements[2];
     }
     
-    public Communication(String aChipher, String aChipherCheck, String aSystemId){
-        this.chipher = aChipher;
-        this.chiperCheck = aChipherCheck;
-        this.systemId = aSystemId;
-    }
-    
-    public String getSystemId() {
-        
-        return this.systemId;
-    }
-    
-    public String getChipher() {
-        return this.chipher;
-    }
-    
-    public String getChipherCheck()
+    public Communication(String chipher, String chipherCheck, String systemId)
     {
-        return this.chiperCheck;
+        super(chipher, chipherCheck, systemId);
     }
     
+    @Override
     public String getCommunicationString(){
         StringBuilder sb = new StringBuilder();
         sb.append(this.chipher);

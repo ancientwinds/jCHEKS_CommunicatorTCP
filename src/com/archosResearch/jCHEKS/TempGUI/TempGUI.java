@@ -50,6 +50,7 @@ public class TempGUI extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            
         communicator.sendCommunication(new Communication(text.getText(), "TEMP", "TEMP@"));
         }
     }

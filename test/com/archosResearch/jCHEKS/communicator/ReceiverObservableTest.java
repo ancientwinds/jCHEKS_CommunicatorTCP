@@ -26,7 +26,7 @@ public class ReceiverObservableTest {
         ReceiverObservable instance = new ReceiverObservable();
         instance.addObserver(engine);
         
-        instance.notifyMessageReceived(message);
+        instance.notifyMessageReceived(new Communication(message, "temp", "temps"));
         
         assertEquals(engine.getMessageReceived(), message);
     }

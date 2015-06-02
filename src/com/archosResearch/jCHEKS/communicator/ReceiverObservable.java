@@ -5,6 +5,7 @@
  */
 package com.archosResearch.jCHEKS.communicator;
 
+import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class ReceiverObservable {
         this.observers.add(observer);
     }
     
-    public void notifyMessageReceived(String message){
+    public void notifyMessageReceived(AbstractCommunication communication){
         for(ReceiverObserver observer: this.observers){
-            observer.messageReceived(message);
+            observer.messageReceived(communication);
         }
     }
 }

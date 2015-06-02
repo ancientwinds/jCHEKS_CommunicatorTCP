@@ -5,6 +5,9 @@
  */
 package com.archosResearch.jCHEKS.Engine;
 
+import com.archosResearch.jCHEKS.communicator.Communication;
+import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
+
 /**
  *
  * @author Thomas Lepage
@@ -30,8 +33,8 @@ public class MockEngine extends EngineInterface{
     }
 
     @Override
-    public void messageReceived(String message) {
-        this.messageReceived = message; 
+    public void messageReceived(AbstractCommunication communication) {
+        this.messageReceived = communication.getChipher(); 
     }
     
 }

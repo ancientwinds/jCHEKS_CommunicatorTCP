@@ -9,6 +9,7 @@ import com.archosResearch.jCHEKS.communicator.tcp.TCPCommunicator;
 import com.archosResearch.jCHEKS.TempGUI.TempGUI;
 import com.archosResearch.jCHEKS.communicator.tcp.TCPReceiver;
 import com.archosResearch.jCHEKS.communicator.tcp.TCPSender;
+import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
 import com.archosResearch.jCheks.concept.communicator.AbstractCommunicator;
 import java.awt.EventQueue;
 
@@ -19,9 +20,9 @@ import java.awt.EventQueue;
 public class Engine extends EngineInterface{
     
     @Override
-    public void messageReceived(String message) {
+    public void messageReceived(AbstractCommunication communication) {
         //TODO Temporary method.
-        System.out.println("Message received: " + message);
+        System.out.println("Message received: " + communication.getChipher());
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package com.archosResearch.jCHEKS.communicator.tcp;
 
+import com.archosResearch.jCHEKS.communicator.Communication;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -44,7 +45,8 @@ public class TCPReceiver extends ITCPReceiver implements Runnable{
                 DataInputStream dataIn = new DataInputStream(client.getInputStream());
                 DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
 
-                notifyMessageReceived(dataIn.readUTF());
+                Communication communication = new Communication(dataIn.readUTF());
+                notifyMessageReceived(communication);
                 System.out.println("Sending ACK...");
                 
                 dataOut.writeUTF("I received your message");
