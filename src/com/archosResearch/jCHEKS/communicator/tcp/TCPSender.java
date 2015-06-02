@@ -6,7 +6,7 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.SenderObserver;
-import com.archosResearch.jCheks.concept.communicator.Communication;
+import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class TCPSender extends ITCPSender{
     }
 
     @Override
-    public void sendCommunication(Communication communication) throws TCPSocketException{
+    public void sendCommunication(AbstractCommunication communication) throws TCPSocketException{
         try {
             //System.out.println("Attempting to connect to " + destinationClient.getConnectionInfo());
             Socket clientSocket = new Socket(this.ipAddress, this.port);

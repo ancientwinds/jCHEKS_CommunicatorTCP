@@ -6,7 +6,7 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.SenderObserver;
-import com.archosResearch.jCheks.concept.communicator.Communication;
+import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
 
 /**
  *
@@ -17,7 +17,7 @@ public class MockTCPSender extends ITCPSender{
     private boolean communicationSent = false;
     
     @Override
-    public void sendCommunication(Communication communication) {
+    public void sendCommunication(AbstractCommunication communication) {
         this.communicationSent = true;
     }
     

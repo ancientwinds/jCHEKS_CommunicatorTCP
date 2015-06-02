@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class TCPReceiver extends ITCPReceiver implements Runnable{
     private static TCPReceiver instance = null;
     
-    private final int port = 9001;
+    private final int port = 9000;
     private ServerSocket listeningSocket;
     private boolean running = true;   
     

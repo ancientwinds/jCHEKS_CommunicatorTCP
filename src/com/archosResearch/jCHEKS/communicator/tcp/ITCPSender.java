@@ -6,13 +6,13 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.SenderObservable;
-import com.archosResearch.jCheks.concept.communicator.Communication;
+import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
 
 /**
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public abstract class ITCPSender implements SenderObservable{
-    public abstract void sendCommunication(Communication communication)  throws TCPSocketException;
+    public abstract void sendCommunication(AbstractCommunication communication)  throws TCPSocketException;
 
 }
