@@ -5,6 +5,7 @@
  */
 package com.archosResearch.jCHEKS.communicator.tcp;
 
+import com.archosResearch.jCHEKS.communicator.SenderObserver;
 import com.archosResearch.jCheks.concept.communicator.Communication;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -12,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +23,9 @@ import java.util.logging.Logger;
  * @author Thomas Lepage
  */
 public class TCPSender extends ITCPSender{
-    
+            
+    private final List<SenderObserver> observers = new ArrayList<>();
+
     private final String ipAddress;
     private final int port;
     
@@ -58,4 +63,15 @@ public class TCPSender extends ITCPSender{
             throw new TCPSocketException();
         }    }
 
+    @Override
+    public void addObserver(SenderObserver observer) {
+        this.observers.add(observer);
+    }
+
+    @Override
+    public void notifyMessageACK() {
+        for(SenderObserver observer: this.observers){
+            observer.ackReceived();
+        }
+    }
 }

@@ -5,6 +5,7 @@
  */
 package com.archosResearch.jCHEKS.communicator.tcp;
 
+import com.archosResearch.jCHEKS.communicator.SenderObserver;
 import com.archosResearch.jCheks.concept.communicator.Communication;
 
 /**
@@ -22,6 +23,16 @@ public class MockTCPSender extends ITCPSender{
     
     public boolean isCommunicationSent() {
         return this.communicationSent;
+    }
+
+    @Override
+    public void addObserver(SenderObserver observer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void notifyMessageACK() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

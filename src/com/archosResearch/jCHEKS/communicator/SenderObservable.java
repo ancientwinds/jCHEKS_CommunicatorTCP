@@ -5,24 +5,14 @@
  */
 package com.archosResearch.jCHEKS.communicator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Thomas Lepage
  */
-public class SenderObservable {
+public interface SenderObservable {
     
-    private final List<SenderObserver> observers = new ArrayList<>();
     
-    public void addObserver(SenderObserver observer){
-        this.observers.add(observer);
-    }
+    public void addObserver(SenderObserver observer);
     
-    public void notifyMessageACK(){
-        for(SenderObserver observer: this.observers){
-            observer.ackReceived();
-        }
-    }
+    public void notifyMessageACK();
 }
