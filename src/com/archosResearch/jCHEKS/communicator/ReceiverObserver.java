@@ -9,5 +9,5 @@ import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
  */
 public interface ReceiverObserver {
         
-    public  void messageReceived(AbstractCommunication communication);
+    public void messageReceived(AbstractCommunication communication);
 }
