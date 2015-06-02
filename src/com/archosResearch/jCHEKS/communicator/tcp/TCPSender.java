@@ -5,7 +5,7 @@
  */
 package com.archosResearch.jCHEKS.communicator.tcp;
 
-import com.archosResearch.jCHEKS.communicator.Communication;
+import com.archosResearch.jCheks.concept.communicator.Communication;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class TCPSender extends ITCPSender{
         this.ipAddress = ipAddress;
         this.port = port;
     }
-    
+
     @Override
     public void sendCommunication(Communication communication) throws TCPSocketException{
         try {
@@ -56,6 +56,6 @@ public class TCPSender extends ITCPSender{
             System.out.println("Could not create socket to the destination client.");
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
             throw new TCPSocketException();
-        }  
-    }
+        }    }
+
 }

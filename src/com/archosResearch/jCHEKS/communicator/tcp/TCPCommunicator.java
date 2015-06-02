@@ -5,8 +5,8 @@
  */
 package com.archosResearch.jCHEKS.communicator.tcp;
 
-import com.archosResearch.jCHEKS.communicator.AbstractCommunicator;
-import com.archosResearch.jCHEKS.communicator.Communication;
+import com.archosResearch.jCheks.concept.communicator.AbstractCommunicator;
+import com.archosResearch.jCheks.concept.communicator.Communication;
 import com.archosResearch.jCHEKS.Engine.Engine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Thomas Lepage
  */
-public class TCPCommunicator extends AbstractCommunicator{
+public class TCPCommunicator extends AbstractCommunicator {
     
     private final ITCPSender sender;
     private final ITCPReceiver receiver;

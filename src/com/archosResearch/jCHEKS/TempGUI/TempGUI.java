@@ -5,8 +5,8 @@
  */
 package com.archosResearch.jCHEKS.TempGUI;
 
-import com.archosResearch.jCHEKS.communicator.AbstractCommunicator;
-import com.archosResearch.jCHEKS.communicator.Communication;
+import com.archosResearch.jCheks.concept.communicator.AbstractCommunicator;
+import com.archosResearch.jCheks.concept.communicator.Communication;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

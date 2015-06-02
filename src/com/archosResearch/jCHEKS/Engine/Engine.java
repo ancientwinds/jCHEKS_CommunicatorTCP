@@ -9,6 +9,7 @@ import com.archosResearch.jCHEKS.communicator.tcp.TCPCommunicator;
 import com.archosResearch.jCHEKS.TempGUI.TempGUI;
 import com.archosResearch.jCHEKS.communicator.tcp.TCPReceiver;
 import com.archosResearch.jCHEKS.communicator.tcp.TCPSender;
+import com.archosResearch.jCheks.concept.communicator.AbstractCommunicator;
 import java.awt.EventQueue;
 
 /**
@@ -34,7 +35,7 @@ public class Engine extends EngineInterface{
         Engine engine = new Engine();
         TCPSender sender = new TCPSender("127.0.0.1", 9000);
        
-        TCPCommunicator communicator = new TCPCommunicator(sender, TCPReceiver.getInstance(), engine);
+        AbstractCommunicator communicator = new TCPCommunicator(sender, TCPReceiver.getInstance(), engine);
         //TODO Temporary UI for testing.
         EventQueue.invokeLater(new Runnable() {
 

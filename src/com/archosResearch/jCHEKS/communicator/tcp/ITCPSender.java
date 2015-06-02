@@ -5,8 +5,8 @@
  */
 package com.archosResearch.jCHEKS.communicator.tcp;
 
-import com.archosResearch.jCHEKS.communicator.Communication;
 import com.archosResearch.jCHEKS.communicator.SenderObservable;
+import com.archosResearch.jCheks.concept.communicator.Communication;
 
 /**
  *
