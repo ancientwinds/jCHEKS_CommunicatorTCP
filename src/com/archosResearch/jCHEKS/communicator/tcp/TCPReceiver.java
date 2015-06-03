@@ -17,7 +17,7 @@ public class TCPReceiver extends AbstractTCPReceiver implements Runnable {
 
     private static TCPReceiver instance = null;
 
-    private final int port = 9000;
+    private final int port = 9001;
     private ServerSocket listeningSocket;
     private boolean running = true;
 
@@ -45,7 +45,7 @@ public class TCPReceiver extends AbstractTCPReceiver implements Runnable {
                 DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
 
                 Communication communication = new Communication(dataIn.readUTF());
-                notifyMessageReceived(client.getInetAddress().toString(), communication);
+                notifyMessageReceived(client.getInetAddress().getHostAddress(), communication);
                 System.out.println("Sending ACK...");
                  //TODO
                 dataOut.writeUTF("I received your message");

@@ -37,6 +37,8 @@ public class TCPSender extends AbstractTCPSender {
             InputStream inFromDestination = clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
 
+            
+            //TODO order of the ACK notify
             notifyMessageACK();
 
             System.out.println("From dest: " + dataInFromDestination.readUTF());
