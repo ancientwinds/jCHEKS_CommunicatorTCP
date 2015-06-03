@@ -30,7 +30,9 @@ public class TCPSender extends AbstractTCPSender {
 
             System.out.println("Sending communication to destination...");
             dataOutToDestination.writeUTF(communication.getCommunicationString());
-
+            
+            // TODO : We should put a max waiting time for the ack to avoid hanging processes if the communication is lost
+            // TODO : Then, we need to decide what we do if we don't receive the ack : to evolve, or not to evolve, that is the question!
             System.out.println("Waiting for ACK");
             InputStream inFromDestination = clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
