@@ -11,10 +11,10 @@ import org.junit.Test;
  */
 public class CommunicationTest {
 
-    private static final String chipher = "chipher";
-    private static final String chipherCheck = "chipher check";
+    private static final String cipher = "chipher";
+    private static final String cipherCheck = "chipher check";
     private static final String systemId = "system id";
-    private static final String communicationString = chipher + "~" + chipherCheck + "~" + systemId;
+    private static final String communicationString = cipher + "~" + cipherCheck + "~" + systemId;
 
     /**
      * Test of the single parameter constructor, of class Communication
@@ -31,7 +31,7 @@ public class CommunicationTest {
      */
     @Test
     public void test_constructor_multiple() {
-        Communication instance = new Communication(chipher, chipherCheck, systemId);
+        Communication instance = new Communication(cipher, cipherCheck, systemId);
 
         assertNotNull(instance);
     }
@@ -41,7 +41,7 @@ public class CommunicationTest {
      */
     @Test
     public void test_get_systemId1() {
-        Communication instance = new Communication(chipher, chipherCheck, systemId);
+        Communication instance = new Communication(cipher, cipherCheck, systemId);
         String expResult = systemId;
         String result = instance.getSystemId();
         assertEquals(expResult, result);
@@ -52,9 +52,9 @@ public class CommunicationTest {
      */
     @Test
     public void test_get_chipher1() {
-        Communication instance = new Communication(chipher, chipherCheck, systemId);
-        String expResult = chipher;
-        String result = instance.getChipher();
+        Communication instance = new Communication(cipher, cipherCheck, systemId);
+        String expResult = cipher;
+        String result = instance.getCipher();
         assertEquals(expResult, result);
     }
 
@@ -63,9 +63,9 @@ public class CommunicationTest {
      */
     @Test
     public void test_get_chipherCheck1() {
-        Communication instance = new Communication(chipher, chipherCheck, systemId);
-        String expResult = chipherCheck;
-        String result = instance.getChipherCheck();
+        Communication instance = new Communication(cipher, cipherCheck, systemId);
+        String expResult = cipherCheck;
+        String result = instance.getCipherCheck();
         assertEquals(expResult, result);
     }
 
@@ -86,8 +86,8 @@ public class CommunicationTest {
     @Test
     public void test_get_chipher2() {
         Communication instance = new Communication(communicationString);
-        String expResult = chipher;
-        String result = instance.getChipher();
+        String expResult = cipher;
+        String result = instance.getCipher();
         assertEquals(expResult, result);
     }
 
@@ -97,8 +97,8 @@ public class CommunicationTest {
     @Test
     public void test_get_chipherCheck2() {
         Communication instance = new Communication(communicationString);
-        String expResult = chipherCheck;
-        String result = instance.getChipherCheck();
+        String expResult = cipherCheck;
+        String result = instance.getCipherCheck();
         assertEquals(expResult, result);
     }
 
@@ -107,7 +107,7 @@ public class CommunicationTest {
      */
     @Test
     public void test_get_communicationString() {
-        Communication instance = new Communication(chipher, chipherCheck, systemId);
+        Communication instance = new Communication(cipher, cipherCheck, systemId);
         String expResult = communicationString;
         String result = instance.getCommunicationString();
         assertEquals(expResult, result);

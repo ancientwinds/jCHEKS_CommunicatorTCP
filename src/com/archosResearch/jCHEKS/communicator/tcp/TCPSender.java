@@ -8,17 +8,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author Thomas Lepage
  */
 public class TCPSender extends AbstractTCPSender {
-
-    private final String ipAddress;
-    private final int port;
 
     public TCPSender(String ipAddress, int port) {
         this.ipAddress = ipAddress;

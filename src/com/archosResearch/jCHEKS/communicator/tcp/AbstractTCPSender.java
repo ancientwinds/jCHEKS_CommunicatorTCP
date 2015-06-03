@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.AbstractObservable;
@@ -15,6 +11,12 @@ import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
  */
 public abstract class AbstractTCPSender extends AbstractObservable<SenderObserver> {
 
+    protected String ipAddress;
+    protected int port;
+    
     public abstract void sendCommunication(AbstractCommunication communication) throws TCPSocketException;
 
+    public String getIpAddress() {
+        return this.ipAddress;
+    }
 }

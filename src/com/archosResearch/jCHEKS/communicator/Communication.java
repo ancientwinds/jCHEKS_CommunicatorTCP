@@ -8,23 +8,25 @@ import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
  */
 public class Communication extends AbstractCommunication {
 
+    //TODO Fsctory
     public Communication(String communication) {
         String[] communicationElements = communication.split("~");
-        this.chipher = communicationElements[0];
-        this.chiperCheck = communicationElements[1];
+        this.cipher = communicationElements[0];
+        this.cipherCheck = communicationElements[1];
         this.systemId = communicationElements[2];
     }
 
-    public Communication(String chipher, String chipherCheck, String systemId) {
-        super(chipher, chipherCheck, systemId);
+    public Communication(String cipher, String cipherCheck, String systemId) {
+        super(cipher, cipherCheck, systemId);
     }
 
     @Override
     public String getCommunicationString() {
+        //TODO change sb to StringBuilder
         StringBuilder sb = new StringBuilder();
-        sb.append(this.chipher);
+        sb.append(this.cipher);
         sb.append("~");
-        sb.append(this.chiperCheck);
+        sb.append(this.cipherCheck);
         sb.append("~");
         sb.append(this.systemId);
 

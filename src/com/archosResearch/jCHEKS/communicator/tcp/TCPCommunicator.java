@@ -21,7 +21,7 @@ public class TCPCommunicator extends AbstractCommunicator implements SenderObser
         this.sender.addObserver(this);
 
         this.receiver = receiver;
-        this.receiver.addObserver(this);
+        this.receiver.addObserver(this.sender.getIpAddress(), this);
     }
 
     @Override

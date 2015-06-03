@@ -9,7 +9,7 @@ import java.util.Set;
  * @author Thomas Lepage
  * @param <T>
  */
-public class AbstractObservable<T> {
+public abstract class AbstractObservable<T> {
     protected final Set<T> observers = new HashSet<>();
     
     public void addObserver(T observer){
