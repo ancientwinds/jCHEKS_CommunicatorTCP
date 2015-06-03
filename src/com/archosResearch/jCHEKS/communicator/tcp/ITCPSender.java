@@ -12,7 +12,8 @@ import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public abstract class ITCPSender implements SenderObservable{
-    public abstract void sendCommunication(AbstractCommunication communication)  throws TCPSocketException;
+public abstract class ITCPSender implements SenderObservable {
+
+    public abstract void sendCommunication(AbstractCommunication communication) throws TCPSocketException;
 
 }
