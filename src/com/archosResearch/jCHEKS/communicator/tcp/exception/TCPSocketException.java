@@ -1,4 +1,4 @@
-package com.archosResearch.jCHEKS.communicator.tcp;
+package com.archosResearch.jCHEKS.communicator.tcp.exception;
 
 /**
  *
