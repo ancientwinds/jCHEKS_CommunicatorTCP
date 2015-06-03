@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author Thomas Lepage
  */
-public class TCPReceiver extends ITCPReceiver implements Runnable {
+public class TCPReceiver extends AbstractTCPReceiver implements Runnable {
 
     private static TCPReceiver instance = null;
 

@@ -15,9 +15,7 @@ import java.util.List;
  *
  * @author Thomas Lepage
  */
-public class TCPSender extends ITCPSender {
-
-    private final List<SenderObserver> observers = new ArrayList<>();
+public class TCPSender extends AbstractTCPSender {
 
     private final String ipAddress;
     private final int port;
@@ -52,12 +50,6 @@ public class TCPSender extends ITCPSender {
         }
     }
 
-    @Override
-    public void addObserver(SenderObserver observer) {
-        this.observers.add(observer);
-    }
-
-    @Override
     public void notifyMessageACK() {
         for (SenderObserver observer : this.observers) {
             observer.ackReceived();

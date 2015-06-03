@@ -7,7 +7,7 @@ import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
  *
  * @author Thomas Lepage
  */
-public class MockTCPSender extends ITCPSender {
+public class MockTCPSender extends AbstractTCPSender {
 
     private boolean communicationSent = false;
     public boolean throwException = false;
@@ -24,14 +24,4 @@ public class MockTCPSender extends ITCPSender {
     public boolean isCommunicationSent() {
         return this.communicationSent;
     }
-
-    @Override
-    public void addObserver(SenderObserver observer) {
-        this.observer = observer;
-    }
-
-    @Override
-    public void notifyMessageACK() {
-    }
-
 }
