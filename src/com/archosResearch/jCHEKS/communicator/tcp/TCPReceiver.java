@@ -17,8 +17,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
     private static TCPReceiver instance = null;
 
-    private final int port = 9001;
-    private ServerSocket listeningSocket;
+    private static int port = 9001;
     private boolean running = true;
 
     private TCPReceiver() {
