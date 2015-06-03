@@ -9,7 +9,7 @@ import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public abstract class AbstractTCPSender extends AbstractObservable<SenderObserver> {
+public abstract class AbstractSender extends AbstractObservable<SenderObserver> {
 
     protected String ipAddress;
     protected int port;

@@ -12,10 +12,10 @@ import com.archosResearch.jCheks.concept.communicator.CommunicatorException;
  */
 public class TCPCommunicator extends AbstractCommunicator implements SenderObserver, ReceiverObserver {
 
-    private final AbstractTCPSender sender;
-    private final AbstractTCPReceiver receiver;
+    private final AbstractSender sender;
+    private final AbstractReceiver receiver;
 
-    public TCPCommunicator(AbstractTCPSender sender, AbstractTCPReceiver receiver) {
+    public TCPCommunicator(TCPSender sender, TCPReceiver receiver) {
 
         this.sender = sender;
         this.sender.addObserver(this);

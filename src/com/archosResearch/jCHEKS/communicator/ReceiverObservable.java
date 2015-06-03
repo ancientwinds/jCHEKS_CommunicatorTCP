@@ -17,6 +17,8 @@ public abstract class ReceiverObservable {
     }
 
     public void notifyMessageReceived(String ipAddress, AbstractCommunication communication) {
+        System.out.println(ipAddress);
+        System.out.println("count: " + this.observers.size());
         this.observers.get(ipAddress).messageReceived(communication);
     }
 }

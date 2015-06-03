@@ -7,7 +7,7 @@ import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
  *
  * @author Thomas Lepage
  */
-public class MockTCPSender extends AbstractTCPSender {
+public class MockTCPSender extends AbstractSender {
 
     private boolean communicationSent = false;
     public boolean throwException = false;

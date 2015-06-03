@@ -13,7 +13,7 @@ import java.net.Socket;
  *
  * @author Thomas Lepage
  */
-public class TCPSender extends AbstractTCPSender {
+public class TCPSender extends AbstractSender {
 
     public TCPSender(String ipAddress, int port) {
         this.ipAddress = ipAddress;
@@ -37,6 +37,8 @@ public class TCPSender extends AbstractTCPSender {
             InputStream inFromDestination = clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
 
+            
+            //TODO order of the ACK notify
             notifyMessageACK();
 
             System.out.println("From dest: " + dataInFromDestination.readUTF());

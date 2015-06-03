@@ -13,17 +13,21 @@ import java.util.logging.Logger;
  *
  * @author Thomas Lepage
  */
-public class TCPReceiver extends AbstractTCPReceiver implements Runnable {
+public class TCPReceiver extends AbstractReceiver implements Runnable {
 
     private static TCPReceiver instance = null;
 
-    private final int port = 9000;
-    private ServerSocket listeningSocket;
+    private static int port;
     private boolean running = true;
 
-    public static TCPReceiver getInstance() {
+    private TCPReceiver() {
+        
+    }
+    
+    public static TCPReceiver getInstance(int port) {
         if (instance == null) {
             instance = new TCPReceiver();
+            TCPReceiver.port = port;
             Thread receiverThread = new Thread(instance);
             receiverThread.setDaemon(true);
             receiverThread.start();
@@ -31,11 +35,15 @@ public class TCPReceiver extends AbstractTCPReceiver implements Runnable {
         }
         return instance;
     }
+    
+    public void stopReceiver() {
+        this.running = false;
+    }
 
     @Override
     public void run() {
         try {
-            listeningSocket = new ServerSocket(this.port);
+            ServerSocket listeningSocket = new ServerSocket(TCPReceiver.port);
 
             while (running) {
                 Socket client = listeningSocket.accept();
@@ -45,7 +53,7 @@ public class TCPReceiver extends AbstractTCPReceiver implements Runnable {
                 DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
 
                 Communication communication = new Communication(dataIn.readUTF());
-                notifyMessageReceived(client.getInetAddress().toString(), communication);
+                notifyMessageReceived(client.getInetAddress().getHostAddress(), communication);
                 System.out.println("Sending ACK...");
                  //TODO
                 dataOut.writeUTF("I received your message");

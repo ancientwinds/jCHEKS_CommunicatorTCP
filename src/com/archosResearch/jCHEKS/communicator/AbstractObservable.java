@@ -15,4 +15,8 @@ public abstract class AbstractObservable<T> {
     public void addObserver(T observer){
         this.observers.add(observer);
     }
+    
+    public void removeObserver(T observer) {
+        this.observers.remove(observer);
+    }
 }

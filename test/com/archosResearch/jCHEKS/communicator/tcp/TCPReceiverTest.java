@@ -14,7 +14,7 @@ public class TCPReceiverTest {
      */
     @Test
     public void test_getInstance_for_the_first_time() {
-        TCPReceiver instance = TCPReceiver.getInstance();
+        TCPReceiver instance = TCPReceiver.getInstance(9000);
 
         assertNotNull(instance);
     }
@@ -25,7 +25,7 @@ public class TCPReceiverTest {
      */
     @Test
     public void test_getInstance_for_the_second_time() {
-        TCPReceiver instance = TCPReceiver.getInstance();
+        TCPReceiver instance = TCPReceiver.getInstance(9000);
 
         assertNotNull(instance);
     }
