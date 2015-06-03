@@ -7,15 +7,15 @@ import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
  * @author Thomas Lepage
  */
 public class Communication extends AbstractCommunication {
+    
+    public static Communication createCommunication(String communicationString)
+    {        
+        String[] communicationElements = communicationString.split("~");
 
-    //TODO Fsctory
-    public Communication(String communication) {
-        String[] communicationElements = communication.split("~");
-        this.cipher = communicationElements[0];
-        this.cipherCheck = communicationElements[1];
-        this.systemId = communicationElements[2];
+        Communication communication = new Communication(communicationElements[0], communicationElements[1], communicationElements[2]);
+        return communication;
     }
-
+            
     public Communication(String cipher, String cipherCheck, String systemId) {
         super(cipher, cipherCheck, systemId);
     }

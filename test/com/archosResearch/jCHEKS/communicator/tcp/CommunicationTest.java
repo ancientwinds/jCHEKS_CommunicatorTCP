@@ -11,8 +11,8 @@ import org.junit.Test;
  */
 public class CommunicationTest {
 
-    private static final String cipher = "chipher";
-    private static final String cipherCheck = "chipher check";
+    private static final String cipher = "cipher";
+    private static final String cipherCheck = "cipher check";
     private static final String systemId = "system id";
     private static final String communicationString = cipher + "~" + cipherCheck + "~" + systemId;
 
@@ -21,7 +21,7 @@ public class CommunicationTest {
      */
     @Test
     public void test_constructor_single() {
-        Communication instance = new Communication(communicationString);
+        Communication instance = Communication.createCommunication(communicationString);
 
         assertNotNull(instance);
     }
@@ -51,7 +51,7 @@ public class CommunicationTest {
      * Test of getChipher method, of class Communication.
      */
     @Test
-    public void test_get_chipher1() {
+    public void test_get_cipher1() {
         Communication instance = new Communication(cipher, cipherCheck, systemId);
         String expResult = cipher;
         String result = instance.getCipher();
@@ -62,7 +62,7 @@ public class CommunicationTest {
      * Test of getChipherCheck method, of class Communication.
      */
     @Test
-    public void test_get_chipherCheck1() {
+    public void test_get_cipherCheck1() {
         Communication instance = new Communication(cipher, cipherCheck, systemId);
         String expResult = cipherCheck;
         String result = instance.getCipherCheck();
@@ -74,7 +74,7 @@ public class CommunicationTest {
      */
     @Test
     public void test_get_systemId2() {
-        Communication instance = new Communication(communicationString);
+        Communication instance = Communication.createCommunication(communicationString);
         String expResult = systemId;
         String result = instance.getSystemId();
         assertEquals(expResult, result);
@@ -84,8 +84,8 @@ public class CommunicationTest {
      * Test of getChipher method, of class Communication.
      */
     @Test
-    public void test_get_chipher2() {
-        Communication instance = new Communication(communicationString);
+    public void test_get_cipher2() {
+        Communication instance = Communication.createCommunication(communicationString);
         String expResult = cipher;
         String result = instance.getCipher();
         assertEquals(expResult, result);
@@ -95,8 +95,8 @@ public class CommunicationTest {
      * Test of getChipherCheck method, of class Communication.
      */
     @Test
-    public void test_get_chipherCheck2() {
-        Communication instance = new Communication(communicationString);
+    public void test_get_cipherCheck2() {
+        Communication instance = Communication.createCommunication(communicationString);
         String expResult = cipherCheck;
         String result = instance.getCipherCheck();
         assertEquals(expResult, result);

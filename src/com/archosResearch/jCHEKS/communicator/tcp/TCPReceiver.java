@@ -52,8 +52,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
                 DataInputStream dataIn = new DataInputStream(client.getInputStream());
                 DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
 
-                Communication communication = new Communication(dataIn.readUTF());
-                notifyMessageReceived(client.getInetAddress().getHostAddress(), communication);
+                notifyMessageReceived(client.getInetAddress().getHostAddress(), Communication.createCommunication(dataIn.readUTF()));
                 System.out.println("Sending ACK...");
                  //TODO
                 dataOut.writeUTF("I received your message");
