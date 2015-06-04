@@ -20,7 +20,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
     private static int port = 9001;
     private boolean running = true;
 
-    private TCPReceiver() {
+    protected TCPReceiver() {
         
     }
     
@@ -36,9 +36,9 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
         return instance;
     }
     
-    public void stopReceiver() {
+    /*public void stopReceiver() {
         this.running = false;
-    }
+    }*/
 
     @Override
     public void run() {
@@ -56,6 +56,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
                 System.out.println("Sending ACK...");
                  //TODO
                 dataOut.writeUTF("I received your message");
+                client.close();
             }
 
             listeningSocket.close();

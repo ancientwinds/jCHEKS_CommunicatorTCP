@@ -1,6 +1,6 @@
 package com.archosResearch.jCHEKS.communicator;
 
-import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
+import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 
 /**
  *

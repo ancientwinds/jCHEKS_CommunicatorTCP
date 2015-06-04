@@ -3,9 +3,9 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
 import com.archosResearch.jCHEKS.communicator.ReceiverObserver;
 import com.archosResearch.jCHEKS.communicator.SenderObserver;
-import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
-import com.archosResearch.jCheks.concept.communicator.AbstractCommunicator;
-import com.archosResearch.jCheks.concept.communicator.CommunicatorException;
+import com.archosResearch.jCHEKS.communicator.exception.CommunicatorException;
+import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
+import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunicator;
 
 /**
  *
@@ -30,7 +30,7 @@ public class TCPCommunicator extends AbstractCommunicator implements SenderObser
         try {
             this.sender.sendCommunication(communication);
         } catch (TCPSocketException ex) {
-            throw new CommunicatorException();
+            throw new CommunicatorException("Cannot send communication.", ex);
         }
 
     }

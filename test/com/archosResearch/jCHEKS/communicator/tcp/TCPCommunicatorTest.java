@@ -1,9 +1,11 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
+import com.archosResearch.jCHEKS.communicator.mock.MockTCPReceiver;
 import com.archosResearch.jCHEKS.communicator.Communication;
-import com.archosResearch.jCheks.concept.communicator.CommunicatorException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.archosResearch.jCHEKS.communicator.exception.CommunicatorException;
+import com.archosResearch.jCHEKS.communicator.mock.MockEngine;
+import com.archosResearch.jCHEKS.communicator.mock.MockTCPSender;
+import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -19,39 +21,98 @@ public class TCPCommunicatorTest {
      */
     @Test
     public void test_TCPCommunicator_constructor() {
-        TCPCommunicator instance = new TCPCommunicator(new TCPSender("0.0.0.0", 9000), TCPReceiver.getInstance(9001));
+        String ipAddress = "1.1.1.1";
+        int port = 9000;
 
-        assertNotNull(instance);
+        MockTCPSender sender = new MockTCPSender(ipAddress, port);
+        MockTCPReceiver receiver = new MockTCPReceiver();
+        
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        assertNotNull(communicator);
     }
+    
+    @Test
+    public void test_notifyMessageReceived() {
+        String ipAddress = "1.1.1.1";
+        int port = 9000;
 
+        MockTCPSender sender = new MockTCPSender(ipAddress, port);
+        MockTCPReceiver receiver = new MockTCPReceiver();
+        
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        MockEngine engine = new MockEngine();
+        communicator.addObserver(engine);
+        
+        AbstractCommunication communication = new Communication("temp", "temp", "temp");
+        
+        /*************************/
+        receiver.notifyMessage(ipAddress, communication);
+        
+        /*************************/
+        assertTrue(communication == engine.lastCommunication);
+        
+    }
+    
+    @Test
+    public void test_ackReceived(){
+        String ipAddress = "1.1.1.1";
+        int port = 9000;
+
+        MockTCPSender sender = new MockTCPSender(ipAddress, port);
+        MockTCPReceiver receiver = new MockTCPReceiver();
+        
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        MockEngine engine = new MockEngine();
+        communicator.addObserver(engine);
+        
+        AbstractCommunication communication = new Communication("temp", "temp", "temp");
+        
+        /*************************/
+        sender.receiveAck();
+        
+        /*************************/
+        assertTrue(engine.ackReceived);
+    }
     /**
      * Test of the sendCommunication method, of class TCPCommunicator.
+     * @throws com.archosResearch.jCHEKS.communicator.exception.CommunicatorException
      */
-    /*@Test
-    public void test_sendCommunication() {
-        MockTCPSender sender = new MockTCPSender();
+    @Test
+    public void test_sendCommunication() throws CommunicatorException {
+        String ipAddress = "1.1.1.1";
+        int port = 9000;
+
+        MockTCPSender sender = new MockTCPSender(ipAddress, port);
         MockTCPReceiver receiver = new MockTCPReceiver();
-        TCPCommunicator instance = new TCPCommunicator(sender, receiver);
-        Communication communication = new Communication("test", "test", "test");
+        
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        MockEngine engine = new MockEngine();
+        communicator.addObserver(engine);
+        
+        AbstractCommunication communication = new Communication("temp", "temp", "temp");
 
-        try {
-            instance.sendCommunication(communication);
-        } catch (CommunicatorException ex) {
-            Logger.getLogger(TCPCommunicatorTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        communicator.sendCommunication(communication);
+                
+        assertTrue(communication == sender.lastCommunication);
 
-        assertTrue(sender.isCommunicationSent());
     }
 
     @Test(expected = CommunicatorException.class)
     public void test_sendCommunication_with_exception() throws CommunicatorException {
-        MockTCPSender sender = new MockTCPSender();
-        sender.throwException = true;
-        MockTCPReceiver receiver = new MockTCPReceiver();
-        TCPCommunicator instance = new TCPCommunicator(sender, receiver);
-        Communication communication = new Communication("test", "test", "test");
+        String ipAddress = "1.1.1.1";
+        int port = 9000;
 
-        instance.sendCommunication(communication);
-    }*/
+        MockTCPSender sender = new MockTCPSender(ipAddress, port);
+        MockTCPReceiver receiver = new MockTCPReceiver();
+        
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        MockEngine engine = new MockEngine();
+        communicator.addObserver(engine);
+        
+        AbstractCommunication communication = new Communication("temp", "temp", "temp");
+        sender.setThrowException(true);
+        
+        communicator.sendCommunication(communication);                
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.archosResearch.jCHEKS.communicator;
 
-import com.archosResearch.jCheks.concept.communicator.AbstractCommunication;
+import com.archosResearch.jCHEKS.communicator.tcp.TCPReceiver;
+import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +18,6 @@ public abstract class ReceiverObservable {
     }
 
     public void notifyMessageReceived(String ipAddress, AbstractCommunication communication) {
-        System.out.println(ipAddress);
-        System.out.println("count: " + this.observers.size());
         this.observers.get(ipAddress).messageReceived(communication);
     }
 }
