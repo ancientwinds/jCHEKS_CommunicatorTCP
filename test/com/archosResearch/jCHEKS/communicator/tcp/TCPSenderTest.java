@@ -9,13 +9,10 @@ import org.junit.Test;
  */
 public class TCPSenderTest {
 
-    /**
-     * Test of the constructor, of class TCPSender.
-     */
     @Test
-    public void test_TCPSender() {
-        TCPSender sender = new TCPSender("127.0.0.1", 9000);
-
+    public void costructor_should_create_the_object() {
+        TCPSender sender;
+        sender = new TCPSender("127.0.0.1", 9000);
         assertNotNull(sender);
     }
 
