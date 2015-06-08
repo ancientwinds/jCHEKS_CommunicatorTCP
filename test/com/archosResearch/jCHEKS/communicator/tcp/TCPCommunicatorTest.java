@@ -6,6 +6,7 @@ import com.archosResearch.jCHEKS.communicator.exception.CommunicatorException;
 import com.archosResearch.jCHEKS.communicator.mock.MockEngine;
 import com.archosResearch.jCHEKS.communicator.mock.MockTCPSender;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
+import com.archosResearch.jCHEKS.concept.exception.AbstractCommunicatorException;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -78,7 +79,7 @@ public class TCPCommunicatorTest {
      * @throws com.archosResearch.jCHEKS.communicator.exception.CommunicatorException
      */
     @Test
-    public void test_sendCommunication() throws CommunicatorException {
+    public void test_sendCommunication() throws AbstractCommunicatorException {
         String ipAddress = "1.1.1.1";
         int port = 9000;
 
@@ -98,7 +99,7 @@ public class TCPCommunicatorTest {
     }
 
     @Test(expected = CommunicatorException.class)
-    public void test_sendCommunication_with_exception() throws CommunicatorException {
+    public void test_sendCommunication_with_exception() throws AbstractCommunicatorException {
         String ipAddress = "1.1.1.1";
         int port = 9000;
 
