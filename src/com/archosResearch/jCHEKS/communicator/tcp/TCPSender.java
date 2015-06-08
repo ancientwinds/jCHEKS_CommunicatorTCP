@@ -3,11 +3,7 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
 import com.archosResearch.jCHEKS.communicator.SenderObserver;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 
 /**
@@ -16,11 +12,18 @@ import java.net.Socket;
  */
 public class TCPSender extends AbstractSender {
 
+    private final String ipAddress;
+    private final int port;
+    
     public TCPSender(String ipAddress, int port) {
         this.ipAddress = ipAddress;
         this.port = port;
     }
-
+    
+    public String getIpAddress() {
+        return this.ipAddress;
+    }
+     
     @Override
     public void sendCommunication(AbstractCommunication communication) throws TCPSocketException {
         try {
@@ -40,14 +43,14 @@ public class TCPSender extends AbstractSender {
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
 
             
-            //TODO order of the ACK notify
+            //TODO Create better ack system.
             notifyMessageACK();
 
             System.out.println("From dest: " + dataInFromDestination.readUTF());
 
             clientSocket.close();
         } catch (IOException ex) {
-            throw new TCPSocketException("Socket error", ex);
+            throw new TCPSocketException("Socket error.", ex);
         }
     }
 

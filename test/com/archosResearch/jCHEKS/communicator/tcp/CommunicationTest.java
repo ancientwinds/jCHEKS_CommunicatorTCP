@@ -1,8 +1,7 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.Communication;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
@@ -16,102 +15,75 @@ public class CommunicationTest {
     private static final String systemId = "system id";
     private static final String communicationString = cipher + "~" + cipherCheck + "~" + systemId;
 
-    /**
-     * Test of the single parameter constructor, of class Communication
-     */
     @Test
-    public void test_constructor_single() {
-        Communication instance = Communication.createCommunication(communicationString);
-
+    public void factory_should_create_and_return_a_communication() {
+        Communication instance = null;
+        instance = Communication.createCommunication(communicationString);
         assertNotNull(instance);
     }
 
-    /**
-     * Test of the three parameters constructor, of class Communication
-     */
-    @Test
-    public void test_constructor_multiple() {
-        Communication instance = new Communication(cipher, cipherCheck, systemId);
 
+    @Test
+    public void constructor_with_three_parameters_should_create_a_communication() {
+        Communication instance = null;
+        instance = new Communication(cipher, cipherCheck, systemId);
         assertNotNull(instance);
     }
 
-    /**
-     * Test of getSystemId method, of class Communication.
-     */
     @Test
-    public void test_get_systemId1() {
+    public void getSystemId_should_return_systemId_using_constructor() {
         Communication instance = new Communication(cipher, cipherCheck, systemId);
         String expResult = systemId;
         String result = instance.getSystemId();
         assertEquals(expResult, result);
     }
-
-    /**
-     * Test of getChipher method, of class Communication.
-     */
+    
     @Test
-    public void test_get_cipher1() {
+    public void getCipher_should_return_cipher_using_constructor() {
         Communication instance = new Communication(cipher, cipherCheck, systemId);
         String expResult = cipher;
         String result = instance.getCipher();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of getChipherCheck method, of class Communication.
-     */
     @Test
-    public void test_get_cipherCheck1() {
+    public void getCipherCheck_should_return_cipherCheck_using_constructor() {
         Communication instance = new Communication(cipher, cipherCheck, systemId);
         String expResult = cipherCheck;
         String result = instance.getCipherCheck();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of getSystemId method, of class Communication.
-     */
     @Test
-    public void test_get_systemId2() {
+    public void getSystemId_should_return_systemId_using_factory() {
         Communication instance = Communication.createCommunication(communicationString);
         String expResult = systemId;
         String result = instance.getSystemId();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of getChipher method, of class Communication.
-     */
     @Test
-    public void test_get_cipher2() {
+    public void getCipher_should_return_cipher_using_factory() {
         Communication instance = Communication.createCommunication(communicationString);
         String expResult = cipher;
         String result = instance.getCipher();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of getChipherCheck method, of class Communication.
-     */
     @Test
-    public void test_get_cipherCheck2() {
+    public void getCipherCheck_should_return_cipherCheck_using_factory() {
         Communication instance = Communication.createCommunication(communicationString);
         String expResult = cipherCheck;
         String result = instance.getCipherCheck();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of getCommunicationString method, of class Communication.
-     */
     @Test
-    public void test_get_communicationString() {
+    public void getCommunicationString_should_return_the_communication_in_string_format() {
         Communication instance = new Communication(cipher, cipherCheck, systemId);
         String expResult = communicationString;
         String result = instance.getCommunicationString();
         assertEquals(expResult, result);
-
     }
 
 }

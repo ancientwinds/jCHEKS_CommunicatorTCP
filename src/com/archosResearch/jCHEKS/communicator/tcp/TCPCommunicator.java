@@ -1,11 +1,9 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
-import com.archosResearch.jCHEKS.communicator.ReceiverObserver;
-import com.archosResearch.jCHEKS.communicator.SenderObserver;
+import com.archosResearch.jCHEKS.communicator.*;
 import com.archosResearch.jCHEKS.communicator.exception.CommunicatorException;
-import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
-import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunicator;
+import com.archosResearch.jCHEKS.concept.communicator.*;
 import com.archosResearch.jCHEKS.concept.exception.AbstractCommunicatorException;
 
 /**
@@ -14,15 +12,13 @@ import com.archosResearch.jCHEKS.concept.exception.AbstractCommunicatorException
  */
 public class TCPCommunicator extends AbstractCommunicator implements SenderObserver, ReceiverObserver {
 
-    private final AbstractSender sender;
-    private final AbstractReceiver receiver;
+    private final TCPSender sender;
+    private final TCPReceiver receiver;
 
     public TCPCommunicator(TCPSender sender, TCPReceiver receiver) {
-
         this.sender = sender;
-        this.sender.addObserver(this);
-
         this.receiver = receiver;
+        this.sender.addObserver(this);
         this.receiver.addObserver(this.sender.getIpAddress(), this);
     }
 

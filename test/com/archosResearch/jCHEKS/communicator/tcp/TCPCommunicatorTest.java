@@ -1,14 +1,11 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
-import com.archosResearch.jCHEKS.communicator.mock.MockTCPReceiver;
 import com.archosResearch.jCHEKS.communicator.Communication;
 import com.archosResearch.jCHEKS.communicator.exception.CommunicatorException;
-import com.archosResearch.jCHEKS.communicator.mock.MockEngine;
-import com.archosResearch.jCHEKS.communicator.mock.MockTCPSender;
+import com.archosResearch.jCHEKS.communicator.mock.*;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 import com.archosResearch.jCHEKS.concept.exception.AbstractCommunicatorException;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
@@ -17,23 +14,21 @@ import org.junit.Test;
  */
 public class TCPCommunicatorTest {
 
-    /**
-     * Test of the constructor, of class TCPCommunicator.
-     */
     @Test
-    public void test_TCPCommunicator_constructor() {
+    public void constructor_should_create_the_TCPCommunicator() {
         String ipAddress = "1.1.1.1";
         int port = 9000;
 
         MockTCPSender sender = new MockTCPSender(ipAddress, port);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
-        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        TCPCommunicator communicator = null;
+        communicator = new TCPCommunicator(sender, receiver);
         assertNotNull(communicator);
     }
     
     @Test
-    public void test_notifyMessageReceived() {
+    public void notifyMessageReceived_should_notify_communicator_observers() {
         String ipAddress = "1.1.1.1";
         int port = 9000;
 
@@ -46,16 +41,13 @@ public class TCPCommunicatorTest {
         
         AbstractCommunication communication = new Communication("temp", "temp", "temp");
         
-        /*************************/
         receiver.notifyMessage(ipAddress, communication);
         
-        /*************************/
         assertTrue(communication == engine.lastCommunication);
-        
     }
     
     @Test
-    public void test_ackReceived(){
+    public void ackReceived_should_notify_communicator_observers(){
         String ipAddress = "1.1.1.1";
         int port = 9000;
 
@@ -68,18 +60,13 @@ public class TCPCommunicatorTest {
         
         AbstractCommunication communication = new Communication("temp", "temp", "temp");
         
-        /*************************/
         sender.receiveAck();
         
-        /*************************/
         assertTrue(engine.ackReceived);
     }
-    /**
-     * Test of the sendCommunication method, of class TCPCommunicator.
-     * @throws com.archosResearch.jCHEKS.communicator.exception.CommunicatorException
-     */
+    
     @Test
-    public void test_sendCommunication() throws AbstractCommunicatorException {
+    public void sendCommunication_should_send_the_communication() throws AbstractCommunicatorException {
         String ipAddress = "1.1.1.1";
         int port = 9000;
 
@@ -95,11 +82,10 @@ public class TCPCommunicatorTest {
         communicator.sendCommunication(communication);
                 
         assertTrue(communication == sender.lastCommunication);
-
     }
 
     @Test(expected = CommunicatorException.class)
-    public void test_sendCommunication_with_exception() throws AbstractCommunicatorException {
+    public void sendCommunication_should_throw_an_exception_when_he_catch_one() throws AbstractCommunicatorException {
         String ipAddress = "1.1.1.1";
         int port = 9000;
 

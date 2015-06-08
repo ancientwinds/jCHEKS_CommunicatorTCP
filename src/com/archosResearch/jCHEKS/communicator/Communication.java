@@ -22,14 +22,13 @@ public class Communication extends AbstractCommunication {
 
     @Override
     public String getCommunicationString() {
-        //TODO change sb to StringBuilder
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.cipher);
-        sb.append("~");
-        sb.append(this.cipherCheck);
-        sb.append("~");
-        sb.append(this.systemId);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(this.cipher);
+        stringBuilder.append("~");
+        stringBuilder.append(this.cipherCheck);
+        stringBuilder.append("~");
+        stringBuilder.append(this.systemId);
 
-        return sb.toString();
+        return stringBuilder.toString();
     }
 }

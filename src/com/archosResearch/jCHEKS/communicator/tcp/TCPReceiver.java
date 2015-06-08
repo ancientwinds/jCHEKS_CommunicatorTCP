@@ -1,13 +1,9 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.Communication;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.*;
+import java.net.*;
+import java.util.logging.*;
 
 /**
  *
@@ -17,12 +13,10 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
     private static TCPReceiver instance = null;
 
-    private static int port = 9001;
+    private static int port;
     private boolean running = true;
 
-    protected TCPReceiver() {
-        
-    }
+    protected TCPReceiver() {}
     
     public static TCPReceiver getInstance(int port) {
         if (instance == null) {
@@ -31,7 +25,6 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
             Thread receiverThread = new Thread(instance);
             receiverThread.setDaemon(true);
             receiverThread.start();
-
         }
         return instance;
     }
@@ -54,13 +47,15 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
                 notifyMessageReceived(client.getInetAddress().getHostAddress(), Communication.createCommunication(dataIn.readUTF()));
                 System.out.println("Sending ACK...");
-                 //TODO
+                 //TODO create better ack system.
                 dataOut.writeUTF("I received your message");
                 client.close();
             }
 
             listeningSocket.close();
         } catch (IOException ex) {
+            
+            //Find how to throw an exception through a thread.
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

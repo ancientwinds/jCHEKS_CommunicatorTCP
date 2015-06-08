@@ -6,5 +6,4 @@ import com.archosResearch.jCHEKS.communicator.ReceiverObservable;
  *
  * @author Thomas Lepage
  */
-public abstract class AbstractReceiver extends ReceiverObservable {
-}
+public abstract class AbstractReceiver extends ReceiverObservable {}

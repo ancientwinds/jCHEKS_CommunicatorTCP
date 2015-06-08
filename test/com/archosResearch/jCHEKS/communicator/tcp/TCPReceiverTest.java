@@ -9,24 +9,16 @@ import org.junit.Test;
  */
 public class TCPReceiverTest {
 
-    /**
-     * Test of getInstance method, of class TCPReceiver.
-     */
     @Test
-    public void test_getInstance_for_the_first_time() {
+    public void getInstance_create_the_TCPReceiver() {
         TCPReceiver instance = TCPReceiver.getInstance(9000);
-
         assertNotNull(instance);
     }
 
-    /**
-     * Test of getInstance method, of class TCPReceiver.
-     *
-     */
     @Test
-    public void test_getInstance_for_the_second_time() {
+    public void getInstance_return_the_instance_if_it_exist() {
+        TCPReceiver.getInstance(9000);
         TCPReceiver instance = TCPReceiver.getInstance(9000);
-
         assertNotNull(instance);
     }
 
