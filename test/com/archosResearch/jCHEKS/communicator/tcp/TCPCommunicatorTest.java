@@ -41,7 +41,7 @@ public class TCPCommunicatorTest {
         
         AbstractCommunication communication = new Communication("temp", "temp", "temp");
         
-        receiver.notifyMessage(ipAddress, communication);
+        receiver.notifyMessage(ipAddress + port, communication);
         
         assertTrue(communication == engine.lastCommunication);
     }

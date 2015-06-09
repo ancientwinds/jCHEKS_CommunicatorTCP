@@ -24,6 +24,10 @@ public class TCPSender extends AbstractSender implements SecureAckObserver{
     public String getIpAddress() {
         return this.ipAddress;
     }
+    
+    public int getPort() {
+        return this.port;
+    }
      
     @Override
     public void sendCommunication(AbstractCommunication communication) throws TCPSocketException {

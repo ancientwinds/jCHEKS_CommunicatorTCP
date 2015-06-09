@@ -11,8 +11,8 @@ public abstract class ReceiverObservable {
 
     private final HashMap<String, ReceiverObserver> observers = new HashMap();
 
-    public void addObserver(String ipAddress, ReceiverObserver observer) {
-        this.observers.put(ipAddress, observer);
+    public void addObserver(String uniqueId, ReceiverObserver observer) {
+        this.observers.put(uniqueId, observer);
     }
 
     public String  notifyMessageReceived(String ipAddress, AbstractCommunication communication) {
