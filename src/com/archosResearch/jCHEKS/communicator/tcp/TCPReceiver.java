@@ -1,6 +1,5 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
-import com.archosResearch.jCHEKS.communicator.Communication;
 import java.io.*;
 import java.net.*;
 import java.util.HashMap;
@@ -8,7 +7,7 @@ import java.util.logging.*;
 
 /**
  *
- * @author Thomas Lepage
+ * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public class TCPReceiver extends AbstractReceiver implements Runnable {
 

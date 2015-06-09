@@ -4,7 +4,7 @@ import com.archosResearch.jCHEKS.concept.exception.AbstractCommunicatorException
 
 /**
  *
- * @author Thomas Lepage
+ * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public class TCPSocketException extends AbstractCommunicatorException {
 

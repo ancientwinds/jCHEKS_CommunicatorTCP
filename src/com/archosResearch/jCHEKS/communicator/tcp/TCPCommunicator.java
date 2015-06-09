@@ -8,7 +8,7 @@ import com.archosResearch.jCHEKS.concept.exception.AbstractCommunicatorException
 
 /**
  *
- * @author Thomas Lepage
+ * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public class TCPCommunicator extends AbstractCommunicator implements SenderObserver, ReceiverObserver {
 

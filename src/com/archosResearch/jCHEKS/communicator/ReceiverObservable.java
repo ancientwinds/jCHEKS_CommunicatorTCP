@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Thomas Lepage
+ * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public abstract class ReceiverObservable {
 

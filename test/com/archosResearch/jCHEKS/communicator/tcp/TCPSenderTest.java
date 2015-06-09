@@ -5,7 +5,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Thomas Lepage
+ * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public class TCPSenderTest {
 

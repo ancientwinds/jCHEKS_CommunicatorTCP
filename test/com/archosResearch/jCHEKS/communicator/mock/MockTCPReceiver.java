@@ -5,7 +5,7 @@ import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 
 /**
  *
- * @author Thomas Lepage
+ * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public class MockTCPReceiver extends TCPReceiver {
 

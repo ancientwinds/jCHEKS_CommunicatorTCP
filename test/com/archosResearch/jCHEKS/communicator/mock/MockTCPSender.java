@@ -7,7 +7,7 @@ import java.net.SocketException;
 
 /**
  *
- * @author Thomas Lepage
+ * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public class MockTCPSender extends TCPSender {
 

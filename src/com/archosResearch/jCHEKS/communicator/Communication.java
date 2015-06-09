@@ -4,7 +4,7 @@ import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 
 /**
  *
- * @author Thomas Lepage
+ * @author Thomas  thomas.lepage@hotmail.ca
  */
 public class Communication extends AbstractCommunication {
     
