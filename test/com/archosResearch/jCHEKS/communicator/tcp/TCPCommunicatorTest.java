@@ -57,12 +57,27 @@ public class TCPCommunicatorTest {
         TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
-        
-        AbstractCommunication communication = new Communication("temp", "temp", "temp");
-        
+                
         sender.receiveAck();
         
         assertTrue(engine.ackReceived);
+    }
+    
+        @Test
+    public void secureAckReceived_should_notify_communicator_observers(){
+        String ipAddress = "1.1.1.1";
+        int port = 9000;
+
+        MockTCPSender sender = new MockTCPSender(ipAddress, port);
+        MockTCPReceiver receiver = new MockTCPReceiver();
+        
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        MockEngine engine = new MockEngine();
+        communicator.addObserver(engine);
+                
+        sender.receiveSecureAck();
+        
+        assertTrue(engine.secureAckReceived);
     }
     
     @Test

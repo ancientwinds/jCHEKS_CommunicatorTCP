@@ -29,6 +29,10 @@ public class MockTCPSender extends TCPSender {
         notifyMessageACK();
     }
     
+    public void receiveSecureAck() {
+        notifySecureACK();
+    }
+    
     public void setThrowException(boolean shouldThrowException){
         this.shouldThrowException = shouldThrowException;
     }
