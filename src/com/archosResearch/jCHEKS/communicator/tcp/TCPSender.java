@@ -49,10 +49,9 @@ public class TCPSender extends AbstractSender implements SecureAckObserver{
             notifyMessageACK();
             
             TCPSecureAckReceiver ackReceiver = new TCPSecureAckReceiver(clientSocket);
+            ackReceiver.addObserver(this);
             new Thread(ackReceiver).start();
             
-            
-            clientSocket.close();
         } catch (IOException ex) {
             throw new TCPSocketException("Socket error.", ex);
         }

@@ -29,11 +29,12 @@ public class TCPSecureAckReceiver extends AbstractObservable<SecureAckObserver> 
         try {
             InputStream inFromDestination = this.clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
-            
+            System.out.println("Waiting for secure ack");
             String ackMessage = dataInFromDestination.readUTF();
             
             notifyAckReceived(ackMessage);
             
+            clientSocket.close();
             
         } catch (IOException ex) {
             //TODO throw TCPSecureAckReceiverException

@@ -32,8 +32,8 @@ public class TCPCommunicator extends AbstractCommunicator implements SenderObser
     }
     
     @Override
-    public void messageReceived(AbstractCommunication communication) {
-        notifyCommunicationReceived(communication);
+    public String messageReceived(AbstractCommunication communication) {
+        return notifyCommunicationReceived(communication);
     }
 
     @Override

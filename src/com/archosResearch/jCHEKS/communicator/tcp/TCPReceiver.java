@@ -3,6 +3,7 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 import com.archosResearch.jCHEKS.communicator.Communication;
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
 import java.util.logging.*;
 
 /**
@@ -15,6 +16,8 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
     private static int port;
     private boolean running = true;
+    
+    private HashMap<String, Socket> openClients = new HashMap();
 
     protected TCPReceiver() {}
     
@@ -40,30 +43,16 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
             while (running) {
                 Socket client = listeningSocket.accept();
-                System.out.println("Receiving communication...");
-
-                DataInputStream dataIn = new DataInputStream(client.getInputStream());
-                DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
-
-                notifyMessageReceived(client.getInetAddress().getHostAddress(), Communication.createCommunication(dataIn.readUTF()));
-                System.out.println("Sending ACK...");
-                 //TODO create better ack system.
-                dataOut.writeUTF("I received your message");
                 
-                Thread.sleep(5000);
-                dataOut.writeUTF("This is the secure ACK");
-
-                client.close();
+                TCPReceiveThread receiveThread = new TCPReceiveThread(client, this);
+                new Thread(receiveThread).start();
             }
 
             listeningSocket.close();
         } catch (IOException ex) {
-            
             //Find how to throw an exception through a thread.
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(TCPReceiver.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
 }

@@ -15,7 +15,7 @@ public abstract class ReceiverObservable {
         this.observers.put(ipAddress, observer);
     }
 
-    public void notifyMessageReceived(String ipAddress, AbstractCommunication communication) {
-        this.observers.get(ipAddress).messageReceived(communication);
+    public String  notifyMessageReceived(String ipAddress, AbstractCommunication communication) {
+        return this.observers.get(ipAddress).messageReceived(communication);
     }
 }
