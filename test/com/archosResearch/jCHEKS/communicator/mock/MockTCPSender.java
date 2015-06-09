@@ -3,6 +3,7 @@ package com.archosResearch.jCHEKS.communicator.mock;
 import com.archosResearch.jCHEKS.communicator.tcp.TCPSender;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
+import java.net.SocketException;
 
 /**
  *
@@ -20,7 +21,7 @@ public class MockTCPSender extends TCPSender {
     @Override
     public void sendCommunication(AbstractCommunication communication) throws TCPSocketException {
         if(this.shouldThrowException) {
-            throw new TCPSocketException("error");
+            throw new TCPSocketException("error", new SocketException());
         }
         this.lastCommunication = communication;
     }

@@ -7,10 +7,6 @@ import com.archosResearch.jCHEKS.concept.exception.AbstractCommunicatorException
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public class CommunicatorException extends AbstractCommunicatorException{
-
-    public CommunicatorException(String message) {
-        super(message);
-    }
     
     public CommunicatorException(String message, Throwable throwable) {
         super(message, throwable);
