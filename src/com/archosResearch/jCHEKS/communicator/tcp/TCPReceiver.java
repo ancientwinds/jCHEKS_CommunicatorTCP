@@ -49,6 +49,10 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
                 System.out.println("Sending ACK...");
                  //TODO create better ack system.
                 dataOut.writeUTF("I received your message");
+                
+                Thread.sleep(5000);
+                dataOut.writeUTF("This is the secure ACK");
+
                 client.close();
             }
 
@@ -57,6 +61,8 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
             
             //Find how to throw an exception through a thread.
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(TCPReceiver.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
