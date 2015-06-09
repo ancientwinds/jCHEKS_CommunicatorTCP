@@ -9,6 +9,7 @@ import com.archosResearch.jCHEKS.concept.communicator.*;
 public class MockEngine implements CommunicatorObserver{
     
     public boolean ackReceived = false;
+    public boolean secureAckReceived = false;
     public AbstractCommunication lastCommunication;
 
     @Override
@@ -17,7 +18,13 @@ public class MockEngine implements CommunicatorObserver{
     }
 
     @Override
-    public void communicationReceived(AbstractCommunication communication) {
+    public String communicationReceived(AbstractCommunication communication) {
         this.lastCommunication = communication;
+        return communication.getCipher();
+    }
+
+    @Override
+    public void secureAckReceived() {
+        this.secureAckReceived = true;
     }
 }

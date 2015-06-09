@@ -41,4 +41,9 @@ public class TCPCommunicator extends AbstractCommunicator implements SenderObser
         notifyAckReceived();
     }
 
+    @Override
+    public void secureAckReceived() {
+        notifySecureAckReceived();
+    }
+
 }

@@ -6,4 +6,5 @@ package com.archosResearch.jCHEKS.communicator;
  */
 public interface SenderObserver {
     public void ackReceived();
+    public void secureAckReceived();
 }
