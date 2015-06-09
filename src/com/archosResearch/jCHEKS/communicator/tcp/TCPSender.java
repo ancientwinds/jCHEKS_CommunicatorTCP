@@ -58,13 +58,13 @@ public class TCPSender extends AbstractSender implements SecureAckObserver{
         }
     }
 
-    private void notifyMessageACK() {
+    protected void notifyMessageACK() {
         for (SenderObserver observer : this.observers) {
             observer.ackReceived();
         }
     }
     
-    private void notifySecureACK() {
+    protected void notifySecureACK() {
         
     }
 
