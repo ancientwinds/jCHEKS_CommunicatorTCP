@@ -13,7 +13,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
     private static TCPReceiver instance = null;
 
-    private static int port;
+    private static int port = 9000;
     private boolean running = true;
     
     private HashMap<String, Socket> openClients = new HashMap();
@@ -29,6 +29,10 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
             receiverThread.start();
         }
         return instance;
+    }
+    
+    public static TCPReceiver getInstance() {
+        return TCPReceiver.getInstance(TCPReceiver.port);
     }
     
     /*public void stopReceiver() {
