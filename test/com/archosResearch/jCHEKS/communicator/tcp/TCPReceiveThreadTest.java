@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class TCPReceiveThreadTest {
     
     @Test
-    public void costructor_should_create_the_object() {
+    public void constructor_should_create_the_object() {
         TCPReceiveThread instance = null;
         instance = new TCPReceiveThread(new StubSocket(), new MockTCPReceiver());
         

@@ -14,13 +14,17 @@ import org.junit.Test;
  */
 public class TCPCommunicatorTest {
 
+    private final String cipherTest = "cipherTest";
+    private final String cipherCheckTest = "cipherCheckTest";
+    private final String uniqueIdTest = "uniqueIdTest";
+    
     @Test
     public void constructor_should_create_the_TCPCommunicator() {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
         TCPCommunicator communicator = null;
-        communicator = new TCPCommunicator(sender, receiver, "test");
+        communicator = new TCPCommunicator(sender, receiver, uniqueIdTest);
         assertNotNull(communicator);
     }
     
@@ -29,11 +33,11 @@ public class TCPCommunicatorTest {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
-        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, "test");
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, uniqueIdTest);
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
         
-        AbstractCommunication communication = new Communication("temp", "temp", "temp");
+        AbstractCommunication communication = new Communication(cipherTest, cipherCheckTest, uniqueIdTest);
         
         receiver.notifyMessage(communication);
         
@@ -45,7 +49,7 @@ public class TCPCommunicatorTest {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
-        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, "test");
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, uniqueIdTest);
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
                 
@@ -59,7 +63,7 @@ public class TCPCommunicatorTest {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
-        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, "test");
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, uniqueIdTest);
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
                 
@@ -73,11 +77,11 @@ public class TCPCommunicatorTest {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
-        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, "test");
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, uniqueIdTest);
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
         
-        AbstractCommunication communication = new Communication("temp", "temp", "temp");
+        AbstractCommunication communication = new Communication(cipherTest, cipherCheckTest, uniqueIdTest);
 
         communicator.sendCommunication(communication);
                 
@@ -89,11 +93,11 @@ public class TCPCommunicatorTest {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
-        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, "test");
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, uniqueIdTest);
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
         
-        AbstractCommunication communication = new Communication("temp", "temp", "temp");
+        AbstractCommunication communication = new Communication(cipherTest, cipherCheckTest, uniqueIdTest);
         sender.setThrowException(true);
         
         communicator.sendCommunication(communication);                
