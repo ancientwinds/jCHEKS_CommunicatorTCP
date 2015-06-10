@@ -20,7 +20,7 @@ public class TCPCommunicatorTest {
         MockTCPReceiver receiver = new MockTCPReceiver();
         
         TCPCommunicator communicator = null;
-        communicator = new TCPCommunicator(sender, receiver);
+        communicator = new TCPCommunicator(sender, receiver, "test");
         assertNotNull(communicator);
     }
     
@@ -29,7 +29,7 @@ public class TCPCommunicatorTest {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
-        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, "test");
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
         
@@ -45,7 +45,7 @@ public class TCPCommunicatorTest {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
-        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, "test");
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
                 
@@ -59,7 +59,7 @@ public class TCPCommunicatorTest {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
-        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, "test");
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
                 
@@ -73,7 +73,7 @@ public class TCPCommunicatorTest {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
-        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, "test");
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
         
@@ -89,7 +89,7 @@ public class TCPCommunicatorTest {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
-        TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
+        TCPCommunicator communicator = new TCPCommunicator(sender, receiver, "test");
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
         

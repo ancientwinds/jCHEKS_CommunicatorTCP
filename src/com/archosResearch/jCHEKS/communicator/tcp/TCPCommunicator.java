@@ -12,14 +12,14 @@ import com.archosResearch.jCHEKS.concept.exception.AbstractCommunicatorException
  */
 public class TCPCommunicator extends AbstractCommunicator implements SenderObserver, ReceiverObserver {
 
-    private final TCPSender sender;
-    private final TCPReceiver receiver;
+    private final AbstractSender sender;
+    private final AbstractReceiver receiver;
 
-    public TCPCommunicator(TCPSender sender, TCPReceiver receiver) {
+    public TCPCommunicator(AbstractSender sender, AbstractReceiver receiver, String uniqueId) {
         this.sender = sender;
         this.receiver = receiver;
         this.sender.addObserver(this);
-        this.receiver.addObserver(this.sender.getIpAddress() + receiver.getPort(), this);
+        this.receiver.addObserver(uniqueId, this);
     }
 
     @Override
