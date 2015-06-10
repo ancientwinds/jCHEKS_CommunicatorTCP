@@ -9,7 +9,7 @@ import java.util.logging.*;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public class TCPReceiveThread implements Runnable{
+public class TCPReceiveThread extends Thread{
 
     private final Socket clientSocket;
     private final TCPReceiver receiver;
@@ -18,7 +18,7 @@ public class TCPReceiveThread implements Runnable{
         this.clientSocket = clientSocket;
         this.receiver = receiver;
     }
-    @Override
+
     public void run() {
         try {            
             System.out.println("Receiving communication...");

@@ -44,7 +44,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
                 Socket client = listeningSocket.accept();
                 
                 TCPReceiveThread receiveThread = new TCPReceiveThread(client, this);
-                new Thread(receiveThread).start();
+                receiveThread.start();
             }
 
             listeningSocket.close();
@@ -52,6 +52,10 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
             //Find how to throw an exception through a thread.
             Logger.getLogger(TCPCommunicator.class.getName()).log(Level.SEVERE, null, ex);
         } 
+    }
+    
+    public int getPort() {
+        return this.port;
     }
 
 }
