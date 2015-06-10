@@ -27,9 +27,7 @@ public class TCPReceiveThread extends Thread{
             DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
 
             //TODO Maybe rethink this.
-            String ackSecure = this.receiver.notifyMessageReceived(
-                                    clientSocket.getInetAddress().getHostAddress() + clientSocket.getPort(),
-                                    Communication.createCommunication(dataIn.readUTF()));
+            String ackSecure = this.receiver.notifyMessageReceived(Communication.createCommunication(dataIn.readUTF()));
             System.out.println("Sending ACK...");
              //TODO create better ack system.
             dataOut.writeUTF("I received your message");

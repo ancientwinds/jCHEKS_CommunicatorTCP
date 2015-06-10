@@ -9,7 +9,7 @@ import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
  */
 public class MockTCPReceiver extends TCPReceiver {
 
-    public void notifyMessage(String ipAddress, AbstractCommunication communication) {
-        super.notifyMessageReceived(ipAddress, communication);
+    public void notifyMessage(AbstractCommunication communication) {
+        super.notifyMessageReceived(communication);
     }
 }

@@ -16,10 +16,7 @@ public class TCPCommunicatorTest {
 
     @Test
     public void constructor_should_create_the_TCPCommunicator() {
-        String ipAddress = "1.1.1.1";
-        int port = 9000;
-
-        MockTCPSender sender = new MockTCPSender(ipAddress, port);
+        MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
         TCPCommunicator communicator = null;
@@ -29,10 +26,7 @@ public class TCPCommunicatorTest {
     
     @Test
     public void notifyMessageReceived_should_notify_communicator_observers() {
-        String ipAddress = "1.1.1.1";
-        int port = 9000;
-
-        MockTCPSender sender = new MockTCPSender(ipAddress, port);
+        MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
         TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
@@ -41,17 +35,14 @@ public class TCPCommunicatorTest {
         
         AbstractCommunication communication = new Communication("temp", "temp", "temp");
         
-        receiver.notifyMessage(ipAddress + port, communication);
+        receiver.notifyMessage(communication);
         
         assertTrue(communication == engine.lastCommunication);
     }
     
     @Test
     public void ackReceived_should_notify_communicator_observers(){
-        String ipAddress = "1.1.1.1";
-        int port = 9000;
-
-        MockTCPSender sender = new MockTCPSender(ipAddress, port);
+        MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
         TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
@@ -65,10 +56,7 @@ public class TCPCommunicatorTest {
     
         @Test
     public void secureAckReceived_should_notify_communicator_observers(){
-        String ipAddress = "1.1.1.1";
-        int port = 9000;
-
-        MockTCPSender sender = new MockTCPSender(ipAddress, port);
+        MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
         TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
@@ -82,10 +70,7 @@ public class TCPCommunicatorTest {
     
     @Test
     public void sendCommunication_should_send_the_communication() throws AbstractCommunicatorException {
-        String ipAddress = "1.1.1.1";
-        int port = 9000;
-
-        MockTCPSender sender = new MockTCPSender(ipAddress, port);
+        MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
         TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
@@ -101,10 +86,7 @@ public class TCPCommunicatorTest {
 
     @Test(expected = CommunicatorException.class)
     public void sendCommunication_should_throw_an_exception_when_he_catch_one() throws AbstractCommunicatorException {
-        String ipAddress = "1.1.1.1";
-        int port = 9000;
-
-        MockTCPSender sender = new MockTCPSender(ipAddress, port);
+        MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
         TCPCommunicator communicator = new TCPCommunicator(sender, receiver);
