@@ -1,5 +1,6 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
+import com.archosResearch.jCHEKS.communicator.AbstractSender;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
 import com.archosResearch.jCHEKS.communicator.SenderObserver;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
@@ -11,7 +12,7 @@ import java.net.Socket;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public class TCPSender extends AbstractSender implements SecureAckObserver{
+public class TCPSender extends AbstractSender{
 
     private final String ipAddress;
     private final int port;
@@ -52,10 +53,14 @@ public class TCPSender extends AbstractSender implements SecureAckObserver{
             System.out.println(dataInFromDestination.readUTF());
             notifyMessageACK();
             
-            TCPSecureAckReceiver ackReceiver = new TCPSecureAckReceiver(clientSocket);
+            /*TCPSecureAckReceiver ackReceiver = new TCPSecureAckReceiver(clientSocket);
             ackReceiver.addObserver(this);
             new Thread(ackReceiver).start();
-            
+            */
+            Runnable senderTask = () -> { senderSecureAck(clientSocket); };
+            Thread senderSecureAckThread = new Thread(senderTask);
+            senderSecureAckThread.start();
+
         } catch (IOException ex) {
             throw new TCPSocketException("Socket error.", ex);
         }
@@ -72,14 +77,21 @@ public class TCPSender extends AbstractSender implements SecureAckObserver{
             observer.secureAckReceived();
         }
     }
-
-    @Override
-    public void notifySecureAckReceived(String ackMessage) {
-        System.out.println("Secure ACK: " + ackMessage);
-    }
-
-    @Override
-    public void notifyTimeoutReached() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    private void senderSecureAck(Socket clientSocket) {
+        try {
+            InputStream inFromDestination = clientSocket.getInputStream();
+            DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
+            System.out.println("Waiting for secure ack");
+            String ackMessage = dataInFromDestination.readUTF();
+            
+            //Maybe send the ack.
+            notifySecureACK();
+            
+            clientSocket.close();
+            
+        } catch (IOException ex) {
+            //TODO throw TCPSecureAckReceiverException
+        }
     }
 }

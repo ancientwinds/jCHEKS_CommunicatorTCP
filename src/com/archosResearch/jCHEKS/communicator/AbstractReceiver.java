@@ -1,6 +1,4 @@
-package com.archosResearch.jCHEKS.communicator.tcp;
-
-import com.archosResearch.jCHEKS.communicator.ReceiverObservable;
+package com.archosResearch.jCHEKS.communicator;
 
 /**
  *
