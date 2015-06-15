@@ -2,7 +2,6 @@ package com.archosResearch.jCHEKS.communicator;
 
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
 import com.archosResearch.jCHEKS.concept.communicator.*;
-import com.archosResearch.jCHEKS.communicator.SenderObserver;
 
 /**
  *

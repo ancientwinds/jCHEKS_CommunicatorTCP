@@ -21,14 +21,6 @@ public class TCPSender extends AbstractSender{
         this.ipAddress = ipAddress;
         this.port = port;
     }
-    
-    public String getIpAddress() {
-        return this.ipAddress;
-    }
-    
-    public int getPort() {
-        return this.port;
-    }
      
     @Override
     public void sendCommunication(AbstractCommunication communication) throws TCPSocketException {
@@ -89,6 +81,7 @@ public class TCPSender extends AbstractSender{
             notifySecureACK();
             
             clientSocket.close();
+            
             
         } catch (IOException ex) {
             //TODO throw TCPSecureAckReceiverException
