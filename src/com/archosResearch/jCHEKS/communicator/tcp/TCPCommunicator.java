@@ -6,7 +6,6 @@ import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
 import com.archosResearch.jCHEKS.communicator.*;
 import com.archosResearch.jCHEKS.communicator.exception.CommunicatorException;
 import com.archosResearch.jCHEKS.concept.communicator.*;
-import com.archosResearch.jCHEKS.concept.exception.AbstractCommunicatorException;
 
 /**
  *
@@ -25,7 +24,7 @@ public class TCPCommunicator extends AbstractCommunicator implements SenderObser
     }
 
     @Override
-    public void sendCommunication(AbstractCommunication communication) throws AbstractCommunicatorException {
+    public void sendCommunication(AbstractCommunication communication) throws CommunicatorException {
         try {
             this.sender.sendCommunication(communication);
         } catch (TCPSocketException ex) {

@@ -4,7 +4,6 @@ import com.archosResearch.jCHEKS.communicator.Communication;
 import com.archosResearch.jCHEKS.communicator.exception.CommunicatorException;
 import com.archosResearch.jCHEKS.communicator.mock.*;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
-import com.archosResearch.jCHEKS.concept.exception.AbstractCommunicatorException;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -73,7 +72,7 @@ public class TCPCommunicatorTest {
     }
     
     @Test
-    public void sendCommunication_should_send_the_communication() throws AbstractCommunicatorException {
+    public void sendCommunication_should_send_the_communication() throws CommunicatorException {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
@@ -89,7 +88,7 @@ public class TCPCommunicatorTest {
     }
 
     @Test(expected = CommunicatorException.class)
-    public void sendCommunication_should_throw_an_exception_when_he_catch_one() throws AbstractCommunicatorException {
+    public void sendCommunication_should_throw_an_exception_when_he_catch_one() throws CommunicatorException {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         
