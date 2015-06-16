@@ -12,11 +12,11 @@ public class Communication extends AbstractCommunication {
     {        
         String[] communicationElements = communicationString.split("~");
 
-        Communication communication = new Communication(communicationElements[0], communicationElements[1], communicationElements[2]);
+        Communication communication = new Communication(communicationElements[0].getBytes(), communicationElements[1], communicationElements[2]);
         return communication;
     }
             
-    public Communication(String cipher, String cipherCheck, String systemId) {
+    public Communication(byte[] cipher, String cipherCheck, String systemId) {
         super(cipher, cipherCheck, systemId);
     }
 
