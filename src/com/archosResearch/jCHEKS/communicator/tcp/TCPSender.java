@@ -43,13 +43,13 @@ public class TCPSender extends AbstractSender{
             
             //TODO Create better ack system.
             System.out.println(dataInFromDestination.readUTF());
-            notifyMessageACK();
+            notifyMessageACK(communication);
             
             /*TCPSecureAckReceiver ackReceiver = new TCPSecureAckReceiver(clientSocket);
             ackReceiver.addObserver(this);
             new Thread(ackReceiver).start();
             */
-            Runnable senderTask = () -> { senderSecureAck(clientSocket); };
+            Runnable senderTask = () -> { senderSecureAck(clientSocket, communication); };
             Thread senderSecureAckThread = new Thread(senderTask);
             senderSecureAckThread.start();
 
@@ -58,19 +58,19 @@ public class TCPSender extends AbstractSender{
         }
     }
 
-    protected void notifyMessageACK() {
+    protected void notifyMessageACK(AbstractCommunication communication) {
         for (SenderObserver observer : this.observers) {
-            observer.ackReceived();
+            observer.ackReceived(communication);
         }
     }
     
-    protected void notifySecureACK() {
+    protected void notifySecureACK(AbstractCommunication communication) {
         for (SenderObserver observer : this.observers) {
-            observer.secureAckReceived();
+            observer.secureAckReceived(communication);
         }
     }
     
-    private void senderSecureAck(Socket clientSocket) {
+    private void senderSecureAck(Socket clientSocket, AbstractCommunication communication) {
         try {
             InputStream inFromDestination = clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
@@ -78,7 +78,7 @@ public class TCPSender extends AbstractSender{
             String ackMessage = dataInFromDestination.readUTF();
             
             //Maybe send the ack.
-            notifySecureACK();
+            notifySecureACK(communication);
             
             clientSocket.close();
             
