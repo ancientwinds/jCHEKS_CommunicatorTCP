@@ -32,7 +32,6 @@ public class TCPSender extends AbstractSender{
             DataOutputStream dataOutToDestination = new DataOutputStream(outToDestination);
 
             System.out.println("Sending communication to destination...");
-            System.out.println(communication.getCipher().length);
             dataOutToDestination.write(communication.getCommunicationString().getBytes());
             //dataOutToDestination.writeUTF(communication.getCommunicationString());
             System.out.println(communication.getCommunicationString());
