@@ -26,12 +26,12 @@ public class MockTCPSender extends TCPSender {
         this.lastCommunication = communication;
     }
     
-    public void receiveAck() {
-        notifyMessageACK();
+    public void receiveAck(AbstractCommunication communication) {
+        notifyMessageACK(communication);
     }
     
-    public void receiveSecureAck() {
-        notifySecureACK();
+    public void receiveSecureAck(AbstractCommunication communication) {
+        notifySecureACK(communication);
     }
     
     public void setThrowException(boolean shouldThrowException){

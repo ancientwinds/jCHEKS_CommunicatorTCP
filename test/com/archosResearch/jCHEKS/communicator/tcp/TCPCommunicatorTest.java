@@ -52,7 +52,7 @@ public class TCPCommunicatorTest {
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
                 
-        sender.receiveAck();
+        sender.receiveAck(new Communication(cipherTest, cipherCheckTest, uniqueIdTest));
         
         assertTrue(engine.ackReceived);
     }
@@ -66,7 +66,7 @@ public class TCPCommunicatorTest {
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
                 
-        sender.receiveSecureAck();
+        sender.receiveSecureAck(new Communication(cipherTest, cipherCheckTest, uniqueIdTest));
         
         assertTrue(engine.secureAckReceived);
     }

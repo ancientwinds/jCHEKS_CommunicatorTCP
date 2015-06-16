@@ -13,7 +13,7 @@ public class MockEngine implements CommunicatorObserver{
     public AbstractCommunication lastCommunication;
 
     @Override
-    public void ackReceived() {
+    public void ackReceived(AbstractCommunication communication) {
         this.ackReceived = true;
     }
 
@@ -24,7 +24,7 @@ public class MockEngine implements CommunicatorObserver{
     }
 
     @Override
-    public void secureAckReceived() {
+    public void secureAckReceived(AbstractCommunication communication) {
         this.secureAckReceived = true;
     }
 }
