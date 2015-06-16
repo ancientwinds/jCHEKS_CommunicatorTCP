@@ -77,9 +77,12 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
             //TODO Maybe rethink this.
             
-            byte[] message = new byte[2048];
-            dataIn.read(message);
-            String ackSecure = receiver.notifyMessageReceived(Communication.createCommunication(new String(message)));
+            byte[] message = new byte[2048]; 
+            int bytesRead = dataIn.read(message);
+            
+            byte[] newMessage = new byte[bytesRead];
+            newMessage = message;
+            String ackSecure = receiver.notifyMessageReceived(Communication.createCommunication(new String(newMessage)));
             System.out.println("Sending ACK...");
              //TODO create better ack system.
             dataOut.writeUTF("I received your message");
