@@ -2,10 +2,11 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.AbstractReceiver;
 import com.archosResearch.jCHEKS.communicator.Communication;
+import com.archosResearch.jCHEKS.communicator.exception.ReceiverObserverNotFoundException;
+import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
 import java.io.*;
 import java.net.*;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.logging.*;
 
 /**
@@ -19,8 +20,6 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
     private static int port = 9000;
     private boolean running = true;
     
-    private HashMap<String, Socket> openClients = new HashMap();
-
     protected TCPReceiver() {}
     
     public static TCPReceiver getInstance(int port) {
@@ -38,9 +37,9 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
         return TCPReceiver.getInstance(TCPReceiver.port);
     }
     
-    /*public void stopReceiver() {
+    public void stopReceiver() {
         this.running = false;
-    }*/
+    }
 
     @Override
     public void run() {
@@ -50,10 +49,12 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
             while (running) {
                 Socket client = listeningSocket.accept();
                 
-                /*TCPReceiveThread receiveThread = new TCPReceiveThread(client, this);
-                receiveThread.start();*/
-                
-                Runnable receiveTask = () -> { receiveSecureAck(client, this); };
+                Runnable receiveTask = () -> { try {
+                    receiveSecureAck(client, this);
+                    } catch (ReceiverObserverNotFoundException | TCPSocketException ex) {
+                        Logger.getLogger(TCPReceiver.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+};
                 Thread receiveThread = new Thread(receiveTask);
                 receiveThread.start();
             }
@@ -66,10 +67,10 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
     }
     
     public int getPort() {
-        return this.port;
+        return TCPReceiver.port;
     }
     
-    private void receiveSecureAck(Socket socket, TCPReceiver receiver) {
+    private void receiveSecureAck(Socket socket, TCPReceiver receiver) throws ReceiverObserverNotFoundException, TCPSocketException {
         try {            
             System.out.println("Receiving communication...");
 
@@ -92,6 +93,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
             socket.close();
         } catch (IOException ex) {
             //TODO Throw exception!!!
+            throw new TCPSocketException("TCPReceiver error", ex);
         }
     }
 

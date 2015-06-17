@@ -2,6 +2,7 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.Communication;
 import com.archosResearch.jCHEKS.communicator.exception.CommunicatorException;
+import com.archosResearch.jCHEKS.communicator.exception.ReceiverObserverNotFoundException;
 import com.archosResearch.jCHEKS.communicator.mock.*;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 import static org.junit.Assert.*;
@@ -28,7 +29,7 @@ public class TCPCommunicatorTest {
     }
     
     @Test
-    public void notifyMessageReceived_should_notify_communicator_observers() {
+    public void notifyMessageReceived_should_notify_communicator_observers() throws ReceiverObserverNotFoundException {
         MockTCPSender sender = new MockTCPSender("1.1.1.1", 9000);
         MockTCPReceiver receiver = new MockTCPReceiver();
         

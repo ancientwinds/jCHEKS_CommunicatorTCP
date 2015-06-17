@@ -22,6 +22,8 @@ public class Communication extends AbstractCommunication {
 
     @Override
     public String getCommunicationString() {
+        
+        //TODO Use another format for the string maybe XML.
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(this.cipher);
         stringBuilder.append("~");

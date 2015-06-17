@@ -3,10 +3,13 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 import com.archosResearch.jCHEKS.communicator.AbstractSender;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
 import com.archosResearch.jCHEKS.communicator.SenderObserver;
+import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSecureAckReceiverException;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,18 +28,19 @@ public class TCPSender extends AbstractSender{
     @Override
     public void sendCommunication(AbstractCommunication communication) throws TCPSocketException {
         try {
-            Socket clientSocket = new Socket();
-            clientSocket.connect(new InetSocketAddress(this.ipAddress, port), 5000);
-                        
+            Socket clientSocket = new Socket(this.ipAddress, port);
+            //Wait 10 sec and if nothing come in the socket throws Timeout exception.
+            clientSocket.setSoTimeout(10000); 
+            
             OutputStream outToDestination = clientSocket.getOutputStream();
             DataOutputStream dataOutToDestination = new DataOutputStream(outToDestination);
 
             System.out.println("Sending communication to destination...");
             dataOutToDestination.write(communication.getCommunicationString().getBytes());
 
-            // TODO : We should put a max waiting time for the ack to avoid hanging processes if the communication is lost
             // TODO : Then, we need to decide what we do if we don't receive the ack : to evolve, or not to evolve, that is the question!
-            System.out.println("Waiting for ACK");
+            System.out.println("Waiting for ACK");            
+
             InputStream inFromDestination = clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
 
@@ -44,11 +48,12 @@ public class TCPSender extends AbstractSender{
             System.out.println(dataInFromDestination.readUTF());
             notifyMessageACK(communication);
             
-            /*TCPSecureAckReceiver ackReceiver = new TCPSecureAckReceiver(clientSocket);
-            ackReceiver.addObserver(this);
-            new Thread(ackReceiver).start();
-            */
-            Runnable senderTask = () -> { senderSecureAck(clientSocket, communication); };
+            Runnable senderTask = () -> { try {
+                senderSecureAck(clientSocket, communication);
+                } catch (TCPSecureAckReceiverException ex) {
+                    Logger.getLogger(TCPSender.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            };
             Thread senderSecureAckThread = new Thread(senderTask);
             senderSecureAckThread.start();
 
@@ -69,7 +74,7 @@ public class TCPSender extends AbstractSender{
         }
     }
     
-    private void senderSecureAck(Socket clientSocket, AbstractCommunication communication) {
+    private void senderSecureAck(Socket clientSocket, AbstractCommunication communication) throws TCPSecureAckReceiverException {
         try {
             InputStream inFromDestination = clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
@@ -83,7 +88,7 @@ public class TCPSender extends AbstractSender{
             
             
         } catch (IOException ex) {
-            //TODO throw TCPSecureAckReceiverException
+            throw new TCPSecureAckReceiverException("Secure ACK error", ex);
         }
     }
 }

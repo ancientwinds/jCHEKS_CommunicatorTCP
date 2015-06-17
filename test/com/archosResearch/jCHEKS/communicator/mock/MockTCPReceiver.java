@@ -1,5 +1,6 @@
 package com.archosResearch.jCHEKS.communicator.mock;
 
+import com.archosResearch.jCHEKS.communicator.exception.ReceiverObserverNotFoundException;
 import com.archosResearch.jCHEKS.communicator.tcp.TCPReceiver;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 
@@ -9,7 +10,7 @@ import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
  */
 public class MockTCPReceiver extends TCPReceiver {
 
-    public void notifyMessage(AbstractCommunication communication) {
+    public void notifyMessage(AbstractCommunication communication) throws ReceiverObserverNotFoundException {
         super.notifyMessageReceived(communication);
     }
 }

@@ -1,5 +1,6 @@
 package com.archosResearch.jCHEKS.communicator;
 
+import com.archosResearch.jCHEKS.communicator.exception.ReceiverObserverNotFoundException;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 import java.util.HashMap;
 
@@ -15,7 +16,11 @@ public abstract class ReceiverObservable {
         this.observers.put(uniqueId, observer);
     }
 
-    public String  notifyMessageReceived(AbstractCommunication communication) {
-        return this.observers.get(communication.getSystemId()).messageReceived(communication);
+    public String  notifyMessageReceived(AbstractCommunication communication) throws ReceiverObserverNotFoundException {
+        ReceiverObserver observer = this.observers.get(communication.getSystemId());
+        if(observer == null) {
+            throw new ReceiverObserverNotFoundException("Receiver observer not found");
+        }        
+        return observer.messageReceived(communication);
     }
 }
