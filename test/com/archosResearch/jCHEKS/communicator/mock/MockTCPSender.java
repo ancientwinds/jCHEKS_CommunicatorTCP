@@ -13,28 +13,28 @@ public class MockTCPSender extends TCPSender {
 
     public AbstractCommunication lastCommunication;
     public boolean shouldThrowException = false;
-    
+
     public MockTCPSender(String ipAddress, int port) {
         super(ipAddress, port);
     }
-    
+
     @Override
     public void sendCommunication(AbstractCommunication communication) throws TCPSocketException {
-        if(this.shouldThrowException) {
+        if (this.shouldThrowException) {
             throw new TCPSocketException("error", new SocketException());
         }
         this.lastCommunication = communication;
     }
-    
+
     public void receiveAck(AbstractCommunication communication) {
         notifyMessageACK(communication);
     }
-    
+
     public void receiveSecureAck(AbstractCommunication communication) {
         notifySecureACK(communication);
     }
-    
-    public void setThrowException(boolean shouldThrowException){
+
+    public void setThrowException(boolean shouldThrowException) {
         this.shouldThrowException = shouldThrowException;
     }
 

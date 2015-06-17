@@ -29,7 +29,7 @@ public class TCPCommunicator extends AbstractCommunicator implements SenderObser
             throw new CommunicatorException("Cannot send communication.", ex);
         }
     }
-    
+
     @Override
     public String messageReceived(AbstractCommunication communication) {
         return notifyCommunicationReceived(communication);

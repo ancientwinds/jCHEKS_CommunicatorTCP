@@ -6,8 +6,8 @@ import com.archosResearch.jCHEKS.concept.communicator.*;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public class MockEngine implements CommunicatorObserver{
-    
+public class MockEngine implements CommunicatorObserver {
+
     public boolean ackReceived = false;
     public boolean secureAckReceived = false;
     public AbstractCommunication lastCommunication;

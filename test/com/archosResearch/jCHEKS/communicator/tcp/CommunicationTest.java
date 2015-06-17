@@ -22,7 +22,6 @@ public class CommunicationTest {
         assertNotNull(instance);
     }
 
-
     @Test
     public void constructor_with_three_parameters_should_create_a_communication() {
         Communication instance = null;
@@ -37,7 +36,7 @@ public class CommunicationTest {
         String result = instance.getSystemId();
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void getCipher_should_return_cipher_using_constructor() {
         Communication instance = new Communication(cipher, cipherCheck, systemId);

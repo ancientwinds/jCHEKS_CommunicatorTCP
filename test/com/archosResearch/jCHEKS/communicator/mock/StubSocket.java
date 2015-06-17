@@ -6,6 +6,6 @@ import java.net.Socket;
  *
  * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
-public class StubSocket extends Socket{
-    
+public class StubSocket extends Socket {
+
 }

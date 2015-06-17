@@ -4,25 +4,24 @@ import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 
 /**
  *
- * @author Thomas  thomas.lepage@hotmail.ca
+ * @author Thomas thomas.lepage@hotmail.ca
  */
 public class Communication extends AbstractCommunication {
-    
-    public static Communication createCommunication(String communicationString)
-    {        
+
+    public static Communication createCommunication(String communicationString) {
         String[] communicationElements = communicationString.split("~");
 
         Communication communication = new Communication(communicationElements[0], communicationElements[1], communicationElements[2]);
         return communication;
     }
-            
+
     public Communication(String cipher, String cipherCheck, String systemId) {
         super(cipher, cipherCheck, systemId);
     }
 
     @Override
     public String getCommunicationString() {
-        
+
         //TODO Use another format for the string maybe XML.
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(this.cipher);

@@ -16,11 +16,11 @@ public abstract class ReceiverObservable {
         this.observers.put(uniqueId, observer);
     }
 
-    public String  notifyMessageReceived(AbstractCommunication communication) throws ReceiverObserverNotFoundException {
+    public String notifyMessageReceived(AbstractCommunication communication) throws ReceiverObserverNotFoundException {
         ReceiverObserver observer = this.observers.get(communication.getSystemId());
-        if(observer == null) {
+        if (observer == null) {
             throw new ReceiverObserverNotFoundException("Receiver observer not found");
-        }        
+        }
         return observer.messageReceived(communication);
     }
 }

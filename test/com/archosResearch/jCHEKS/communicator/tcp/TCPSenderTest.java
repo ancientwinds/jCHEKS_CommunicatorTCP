@@ -15,7 +15,5 @@ public class TCPSenderTest {
         sender = new TCPSender("127.0.0.1", 9000);
         assertNotNull(sender);
     }
-    
-
 
 }
