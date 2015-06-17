@@ -1,7 +1,6 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
-import com.archosResearch.jCHEKS.communicator.AbstractReceiver;
-import com.archosResearch.jCHEKS.communicator.Communication;
+import com.archosResearch.jCHEKS.communicator.*;
 import com.archosResearch.jCHEKS.communicator.exception.ReceiverObserverNotFoundException;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
 import java.io.*;
@@ -17,7 +16,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
     private static TCPReceiver instance = null;
 
-    private static int port = 9000;
+    private static int port;
     private boolean running = true;
 
     protected TCPReceiver() {
@@ -34,10 +33,6 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
         return instance;
     }
 
-    public static TCPReceiver getInstance() {
-        return TCPReceiver.getInstance(TCPReceiver.port);
-    }
-
     public void stopReceiver() {
         this.running = false;
     }
@@ -52,7 +47,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
                 Runnable receiveTask = () -> {
                     try {
-                        receiveSecureAck(client, this);
+                        sendSecureAck(client, this);
                     } catch (ReceiverObserverNotFoundException | TCPSocketException ex) {
                         Logger.getLogger(TCPReceiver.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -68,13 +63,8 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
         }
     }
 
-    public int getPort() {
-        return TCPReceiver.port;
-    }
-
-    private void receiveSecureAck(Socket socket, TCPReceiver receiver) throws ReceiverObserverNotFoundException, TCPSocketException {
+    private void sendSecureAck(Socket socket, TCPReceiver receiver) throws ReceiverObserverNotFoundException, TCPSocketException {
         try {
-            System.out.println("Receiving communication...");
 
             DataInputStream dataIn = new DataInputStream(socket.getInputStream());
             DataOutputStream dataOut = new DataOutputStream(socket.getOutputStream());
@@ -85,7 +75,6 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
             message = Arrays.copyOf(message, bytesRead);
             String ackSecure = receiver.notifyMessageReceived(Communication.createCommunication(new String(message)));
-            System.out.println("Sending ACK...");
             //TODO create better ack system.
             dataOut.writeUTF("I received your message");
 
@@ -93,7 +82,6 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
             socket.close();
         } catch (IOException ex) {
-            //TODO Throw exception!!!
             throw new TCPSocketException("TCPReceiver error", ex);
         }
     }
