@@ -5,12 +5,12 @@ import org.junit.Test;
 
 /**
  *
- * @author Thomas Lepage
+ * @author Thomas Lepage thomas.lepage@hotmail.ca
  */
 public class TCPSenderTest {
 
     @Test
-    public void costructor_should_create_the_object() {
+    public void constructor_should_create_the_object() {
         TCPSender sender;
         sender = new TCPSender("127.0.0.1", 9000);
         assertNotNull(sender);
