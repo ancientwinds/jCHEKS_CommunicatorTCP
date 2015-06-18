@@ -27,4 +27,19 @@ public class MockEngine implements CommunicatorObserver {
     public void secureAckReceived(AbstractCommunication communication) {
         this.secureAckReceived = true;
     }
+
+    @Override
+    public void failToReceiveAck(AbstractCommunication communication) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void failToReceiveSecureAck(AbstractCommunication communication) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void timeOutReached(AbstractCommunication communication) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

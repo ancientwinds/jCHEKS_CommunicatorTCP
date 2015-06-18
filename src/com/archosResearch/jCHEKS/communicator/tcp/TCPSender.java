@@ -5,6 +5,7 @@ import com.archosResearch.jCHEKS.communicator.tcp.exception.*;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.logging.*;
 
 /**
@@ -25,25 +26,12 @@ public class TCPSender extends AbstractSender {
     public void sendCommunication(AbstractCommunication communication) throws TCPSocketException {
         try {
             Socket clientSocket = new Socket(this.ipAddress, port);
-
             clientSocket.setSoTimeout(10000);
-
-            OutputStream outToDestination = clientSocket.getOutputStream();
-            DataOutputStream dataOutToDestination = new DataOutputStream(outToDestination);
-
-            dataOutToDestination.write(communication.getCommunicationString().getBytes());
-
-            InputStream inFromDestination = clientSocket.getInputStream();
-            DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
-
-            //TODO Create better ack system.
-            dataInFromDestination.readUTF();
-            notifyMessageACK(communication);
 
             Runnable senderTask = () -> {
                 try {
-                    receiveSecureAck(clientSocket, communication);
-                } catch (TCPSecureAckReceiverException ex) {
+                    receiveAck(clientSocket, communication);
+                } catch (TCPAckReceiverException ex) {
                     Logger.getLogger(TCPSender.class.getName()).log(Level.SEVERE, null, ex);
                 }
             };
@@ -66,18 +54,47 @@ public class TCPSender extends AbstractSender {
             observer.secureAckReceived(communication);
         }
     }
+    
+    protected void notifyFailAck(AbstractCommunication communication) {
+        for (SenderObserver observer : this.observers) {
+            observer.failToReceiveAck(communication);
+        }
+    }
+    
+    protected void notifyFailSecureACK(AbstractCommunication communication) {
+        for (SenderObserver observer : this.observers) {
+            observer.failToReceiveSecureAck(communication);
+        }
+    }
+    
+    protected void notifyTimeOutReach(AbstractCommunication communication) {
+        for (SenderObserver observer : this.observers) {
+            observer.timeOutReached(communication);
+        }
+    }
 
-    private void receiveSecureAck(Socket clientSocket, AbstractCommunication communication) throws TCPSecureAckReceiverException {
+    private void receiveAck(Socket clientSocket, AbstractCommunication communication) throws TCPAckReceiverException {
         try {
             InputStream inFromDestination = clientSocket.getInputStream();
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
             String ackMessage = dataInFromDestination.readUTF();
-
-            //Maybe send the ack.
-            notifySecureACK(communication);
+            if(ackMessage.equals(communication.getCipherCheck())) {
+                notifyMessageACK(communication);                
+               
+                String secureAckMessage = dataInFromDestination.readUTF();                
+                if(secureAckMessage.equals("Testing secure ACK")) {
+                    notifySecureACK(communication);
+                } else {
+                    notifyFailSecureACK(communication);
+                }                
+            } else {
+                notifyFailAck(communication);
+            } 
             clientSocket.close();
+        } catch (SocketTimeoutException ex) {
+            notifyFailAck(communication);
         } catch (IOException ex) {
-            throw new TCPSecureAckReceiverException("Secure ACK error", ex);
+            Logger.getLogger(TCPSender.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

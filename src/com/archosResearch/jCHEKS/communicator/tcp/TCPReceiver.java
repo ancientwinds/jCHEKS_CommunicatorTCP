@@ -16,7 +16,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
     private static TCPReceiver instance = null;
 
-    private static int port;
+    private static int port = 9000;
     private boolean running = true;
 
     protected TCPReceiver() {
@@ -31,6 +31,10 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
             receiverThread.start();
         }
         return instance;
+    }
+    
+    public static TCPReceiver getInstance() {
+        return TCPReceiver.getInstance(TCPReceiver.port);
     }
 
     public void stopReceiver() {
@@ -47,7 +51,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
                 Runnable receiveTask = () -> {
                     try {
-                        sendSecureAck(client, this);
+                        receiveCommunication(client, this);
                     } catch (ReceiverObserverNotFoundException | TCPSocketException ex) {
                         Logger.getLogger(TCPReceiver.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -63,7 +67,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
         }
     }
 
-    private void sendSecureAck(Socket socket, TCPReceiver receiver) throws ReceiverObserverNotFoundException, TCPSocketException {
+    private void receiveCommunication(Socket socket, TCPReceiver receiver) throws ReceiverObserverNotFoundException, TCPSocketException {
         try {
 
             DataInputStream dataIn = new DataInputStream(socket.getInputStream());
@@ -74,10 +78,14 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
             int bytesRead = dataIn.read(message);
 
             message = Arrays.copyOf(message, bytesRead);
-            String ackSecure = receiver.notifyMessageReceived(Communication.createCommunication(new String(message)));
             //TODO create better ack system.
-            dataOut.writeUTF("I received your message");
+            
+            //Reception of the message ACK
+            Communication receivedCommunication = Communication.createCommunication(new String(message));
+            dataOut.writeUTF(receivedCommunication.getCipherCheck());
 
+            String ackSecure = receiver.notifyMessageReceived(receivedCommunication);
+            //Decoding of the message ACK (Secure ACK)
             dataOut.writeUTF(ackSecure);
 
             socket.close();
