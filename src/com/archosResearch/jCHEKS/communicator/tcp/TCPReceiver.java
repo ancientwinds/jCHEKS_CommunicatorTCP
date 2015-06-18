@@ -76,6 +76,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
             //TODO Maybe rethink this.
             byte[] message = new byte[2048];
             int bytesRead = dataIn.read(message);
+            System.out.println("Receiving communication");
 
             message = Arrays.copyOf(message, bytesRead);
             //TODO create better ack system.

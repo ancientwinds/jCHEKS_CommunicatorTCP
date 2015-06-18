@@ -27,7 +27,9 @@ public class TCPSender extends AbstractSender {
         try {
             Socket clientSocket = new Socket(this.ipAddress, port);
             clientSocket.setSoTimeout(10000);
-
+            DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
+            dataOut.write(communication.getCommunicationString().getBytes());
+            
             Runnable senderTask = () -> {
                 try {
                     receiveAck(clientSocket, communication);
