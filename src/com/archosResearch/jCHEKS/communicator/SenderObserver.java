@@ -8,7 +8,7 @@ import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
  */
 public interface SenderObserver {
     public void ackReceived(AbstractCommunication communication);
-    public void secureAckReceived(AbstractCommunication communication);    
+    public void secureAckReceived(AbstractCommunication communication, String secureAck);    
     public void failToReceiveAck(AbstractCommunication communication);    
     public void failToReceiveSecureAck(AbstractCommunication communication);
     public void timeOutReached(AbstractCommunication communication);

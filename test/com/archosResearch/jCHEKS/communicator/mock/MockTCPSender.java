@@ -30,8 +30,8 @@ public class MockTCPSender extends TCPSender {
         notifyMessageACK(communication);
     }
 
-    public void receiveSecureAck(AbstractCommunication communication) {
-        notifySecureACK(communication);
+    public void receiveSecureAck(AbstractCommunication communication, String secureAck) {
+        notifySecureACK(communication, secureAck);
     }
 
     public void setThrowException(boolean shouldThrowException) {

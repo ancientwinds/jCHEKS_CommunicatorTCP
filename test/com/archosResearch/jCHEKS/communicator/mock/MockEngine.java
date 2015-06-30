@@ -24,7 +24,7 @@ public class MockEngine implements CommunicatorObserver {
     }
 
     @Override
-    public void secureAckReceived(AbstractCommunication communication) {
+    public void secureAckReceived(AbstractCommunication communication, String secureAck) {
         this.secureAckReceived = true;
     }
 

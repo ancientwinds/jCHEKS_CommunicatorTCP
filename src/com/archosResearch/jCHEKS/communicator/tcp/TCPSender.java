@@ -57,9 +57,9 @@ public class TCPSender extends AbstractSender {
         }
     }
 
-    protected void notifySecureACK(AbstractCommunication communication) {
+    protected void notifySecureACK(AbstractCommunication communication, String secureAck) {
         for (SenderObserver observer : this.observers) {
-            observer.secureAckReceived(communication);
+            observer.secureAckReceived(communication, secureAck);
         }
     }
     
@@ -91,7 +91,7 @@ public class TCPSender extends AbstractSender {
                 try {
                     String secureAckMessage = dataInFromDestination.readUTF();
                     if(secureAckMessage.equals(communication.getCipherCheck())) {
-                        notifySecureACK(communication);
+                        notifySecureACK(communication, secureAckMessage);
                     } else {
                         notifyFailSecureACK(communication);
                     } 

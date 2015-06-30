@@ -67,7 +67,7 @@ public class TCPCommunicatorTest {
         MockEngine engine = new MockEngine();
         communicator.addObserver(engine);
 
-        sender.receiveSecureAck(new Communication(cipherTest, cipherCheckTest, uniqueIdTest));
+        sender.receiveSecureAck(new Communication(cipherTest, cipherCheckTest, uniqueIdTest), "secureAck");
 
         assertTrue(engine.secureAckReceived);
     }
