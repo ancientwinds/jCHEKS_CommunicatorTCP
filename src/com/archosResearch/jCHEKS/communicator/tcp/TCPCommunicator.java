@@ -26,7 +26,7 @@ public class TCPCommunicator extends AbstractCommunicator implements SenderObser
         try {
             this.sender.sendCommunication(communication);
         } catch (TCPSocketException ex) {
-            throw new CommunicatorException("Cannot send communication.", ex);
+            throw new CommunicatorException("Cannot send communication: " + ex.getMessage(), ex);
         }
     }
 
