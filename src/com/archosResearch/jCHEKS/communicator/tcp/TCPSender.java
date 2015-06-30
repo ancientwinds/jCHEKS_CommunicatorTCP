@@ -90,7 +90,7 @@ public class TCPSender extends AbstractSender {
                 notifyMessageACK(communication);         
                 try {
                     String secureAckMessage = dataInFromDestination.readUTF();
-                    if(secureAckMessage.equals("Testing secure ACK")) {
+                    if(secureAckMessage.equals(communication.getCipherCheck())) {
                         notifySecureACK(communication);
                     } else {
                         notifyFailSecureACK(communication);
