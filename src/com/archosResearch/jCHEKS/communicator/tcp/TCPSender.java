@@ -4,6 +4,8 @@ import com.archosResearch.jCHEKS.communicator.*;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.*;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 import java.io.*;
+import java.net.ConnectException;
+import java.net.NoRouteToHostException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.logging.*;
@@ -40,6 +42,10 @@ public class TCPSender extends AbstractSender {
             Thread senderSecureAckThread = new Thread(senderTask);
             senderSecureAckThread.start();
 
+        } catch (NoRouteToHostException ex) {
+            throw new TCPNoRouteException("The destination is unreachable.", ex);
+        } catch (ConnectException ex) {
+            throw new TCPDestinationNotListeningException("The destination does not listen on the port: " + port, ex);
         } catch (IOException ex) {
             throw new TCPSocketException("Socket error.", ex);
         }
