@@ -81,14 +81,17 @@ public class TCPSender extends AbstractSender {
             DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
             String ackMessage = dataInFromDestination.readUTF();
             if(ackMessage.equals(communication.getCipherCheck())) {
-                notifyMessageACK(communication);                
-               
-                String secureAckMessage = dataInFromDestination.readUTF();                
-                if(secureAckMessage.equals("Testing secure ACK")) {
-                    notifySecureACK(communication);
-                } else {
+                notifyMessageACK(communication);         
+                try {
+                    String secureAckMessage = dataInFromDestination.readUTF();
+                    if(secureAckMessage.equals("Testing secure ACK")) {
+                        notifySecureACK(communication);
+                    } else {
+                        notifyFailSecureACK(communication);
+                    } 
+                } catch (SocketTimeoutException ex) {
                     notifyFailSecureACK(communication);
-                }                
+                }                               
             } else {
                 notifyFailAck(communication);
             } 
@@ -96,7 +99,7 @@ public class TCPSender extends AbstractSender {
         } catch (SocketTimeoutException ex) {
             notifyFailAck(communication);
         } catch (IOException ex) {
-            Logger.getLogger(TCPSender.class.getName()).log(Level.SEVERE, null, ex);
+            throw new TCPAckReceiverException("Error when receiving acknowledge", ex);
         }
     }
 }
