@@ -1,7 +1,9 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.*;
+import com.archosResearch.jCHEKS.communicator.exception.CommunicationException;
 import com.archosResearch.jCHEKS.communicator.exception.ReceiverObserverNotFoundException;
+import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPCommunicatorException;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
 import java.io.*;
 import java.net.*;
@@ -52,7 +54,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
                 Runnable receiveTask = () -> {
                     try {
                         receiveCommunication(client, this);
-                    } catch (ReceiverObserverNotFoundException | TCPSocketException ex) {
+                    } catch (ReceiverObserverNotFoundException | TCPSocketException | TCPCommunicatorException ex) {
                         Logger.getLogger(TCPReceiver.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 };
@@ -67,7 +69,7 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
         }
     }
 
-    private void receiveCommunication(Socket socket, TCPReceiver receiver) throws ReceiverObserverNotFoundException, TCPSocketException {
+    private void receiveCommunication(Socket socket, TCPReceiver receiver) throws ReceiverObserverNotFoundException, TCPCommunicatorException, TCPSocketException {
         try {
 
             DataInputStream dataIn = new DataInputStream(socket.getInputStream());
@@ -92,6 +94,8 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
             socket.close();
         } catch (IOException ex) {
             throw new TCPSocketException("TCPReceiver error", ex);
+        } catch (CommunicationException ex) {
+            throw new TCPCommunicatorException("Error while creating communication", ex);
         }
     }
 
