@@ -1,5 +1,6 @@
 package com.archosResearch.jCHEKS.communicator;
 
+import com.archosResearch.jCHEKS.communicator.exception.CommunicationException;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
 import java.io.IOException;
 import java.io.StringReader;
@@ -10,7 +11,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
  */
 public class Communication extends AbstractCommunication {
 
-    public static Communication createCommunication(String communicationString) throws Exception{
+    public static Communication createCommunication(String communicationString) throws CommunicationException{
         try {
             DocumentBuilderFactory dbf =
                     DocumentBuilderFactory.newInstance();
@@ -45,7 +45,7 @@ public class Communication extends AbstractCommunication {
             
             return new Communication(cipherEle.getTextContent(), cipherCheckEle.getTextContent(), systemIdEle.getTextContent());
         } catch (ParserConfigurationException | SAXException | IOException ex) {
-            throw new Exception(ex);
+            throw new CommunicationException("Error while parsing the communication", ex);
         }
     }
 
