@@ -2,8 +2,8 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.*;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
-import com.archosResearch.jCHEKS.communicator.exception.CommunicatorException;
 import com.archosResearch.jCHEKS.concept.communicator.*;
+import com.archosResearch.jCHEKS.concept.exception.CommunicatorException;
 
 /**
  *
@@ -58,6 +58,11 @@ public class TCPCommunicator extends AbstractCommunicator implements SenderObser
     @Override
     public void timeOutReached(AbstractCommunication communication) {
         notifyTimeOutReached(communication);
+    }
+
+    @Override
+    public void exceptionThrown(CommunicatorException exception, AbstractCommunication communication) {
+        notifyExceptionThrown(exception, communication);
     }
 
 }

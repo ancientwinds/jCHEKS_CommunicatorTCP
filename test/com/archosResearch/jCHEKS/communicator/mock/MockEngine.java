@@ -1,6 +1,7 @@
 package com.archosResearch.jCHEKS.communicator.mock;
 
 import com.archosResearch.jCHEKS.concept.communicator.*;
+import com.archosResearch.jCHEKS.concept.exception.CommunicatorException;
 
 /**
  *
@@ -40,6 +41,16 @@ public class MockEngine implements CommunicatorObserver {
 
     @Override
     public void timeOutReached(AbstractCommunication communication) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void secureAckReceived(AbstractCommunication communication, String secureAck) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void exceptionThrown(CommunicatorException ex, AbstractCommunication communication) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
