@@ -1,6 +1,6 @@
 package com.archosResearch.jCHEKS.communicator.tcp.exception;
 
-import com.archosResearch.jCHEKS.communicator.exception.CommunicatorException;
+import com.archosResearch.jCHEKS.concept.exception.CommunicatorException;
 
 /**
  *

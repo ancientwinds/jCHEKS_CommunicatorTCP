@@ -1,10 +1,10 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.Communication;
-import com.archosResearch.jCHEKS.communicator.exception.CommunicatorException;
 import com.archosResearch.jCHEKS.communicator.exception.ReceiverObserverNotFoundException;
 import com.archosResearch.jCHEKS.communicator.mock.*;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
+import com.archosResearch.jCHEKS.concept.exception.CommunicatorException;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
