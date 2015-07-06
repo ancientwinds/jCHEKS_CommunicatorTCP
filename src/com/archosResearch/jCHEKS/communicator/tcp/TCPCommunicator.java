@@ -60,4 +60,9 @@ public class TCPCommunicator extends AbstractCommunicator implements SenderObser
         notifyTimeOutReached(communication);
     }
 
+    @Override
+    public void exceptionThrown(CommunicatorException exception, AbstractCommunication communication) {
+        notifyExceptionThrown(exception, communication);
+    }
+
 }

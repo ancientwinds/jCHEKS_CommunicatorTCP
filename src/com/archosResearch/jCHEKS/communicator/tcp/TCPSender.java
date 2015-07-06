@@ -3,6 +3,7 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 import com.archosResearch.jCHEKS.communicator.*;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.*;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
+import com.archosResearch.jCHEKS.concept.exception.CommunicatorException;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -24,6 +25,18 @@ public class TCPSender extends AbstractSender {
 
     @Override
     public void sendCommunication(AbstractCommunication communication) throws TCPSocketException {
+        Runnable sendCommunicationTask = () -> {
+            try {
+                sendCommunicationThread(communication);
+            } catch (TCPSocketException ex) {
+                notifyException(ex, communication);
+            }
+        };
+        Thread sendCommunicationThread = new Thread(sendCommunicationTask);
+        sendCommunicationThread.start();
+    }
+    
+    private void sendCommunicationThread(AbstractCommunication communication) throws TCPSocketException {
         try {
             Socket clientSocket = new Socket(this.ipAddress, port);
             clientSocket.setSoTimeout(10000);
@@ -72,6 +85,12 @@ public class TCPSender extends AbstractSender {
     protected void notifyTimeOutReach(AbstractCommunication communication) {
         for (SenderObserver observer : this.observers) {
             observer.timeOutReached(communication);
+        }
+    }
+    
+    protected void notifyException(CommunicatorException exception, AbstractCommunication communication) {
+        for (SenderObserver observer : this.observers) {
+            observer.exceptionThrown(exception, communication);
         }
     }
 
