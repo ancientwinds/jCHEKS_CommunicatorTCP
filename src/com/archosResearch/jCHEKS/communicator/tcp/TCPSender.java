@@ -35,16 +35,17 @@ public class TCPSender extends AbstractSender {
             }
         };
         Thread sendCommunicationThread = new Thread(sendCommunicationTask);
+        sendCommunicationThread.setDaemon(true);
         sendCommunicationThread.start();
     }
     
     private void sendCommunicationThread(AbstractCommunication communication) throws TCPSocketException {
         try {
             Socket clientSocket = new Socket(this.ipAddress, port);
-            clientSocket.setSoTimeout(10000);
+            clientSocket.setSoTimeout(10000); 
             DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
             dataOut.write(communication.getCommunicationString().getBytes());
-            
+
             Runnable senderTask = () -> {
                 try {
                     receiveAck(clientSocket, communication);
@@ -53,6 +54,7 @@ public class TCPSender extends AbstractSender {
                 }
             };
             Thread senderSecureAckThread = new Thread(senderTask);
+            senderSecureAckThread.setDaemon(true);
             senderSecureAckThread.start();
 
         } catch (NoRouteToHostException ex) {
