@@ -1,7 +1,7 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.*;
-import com.archosResearch.jCHEKS.communicator.exception.CommunicationException;
+import com.archosResearch.jCHEKS.concept.exception.CommunicationException;
 import com.archosResearch.jCHEKS.communicator.exception.ReceiverObserverNotFoundException;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPCommunicatorException;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
