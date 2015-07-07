@@ -1,6 +1,7 @@
 package com.archosResearch.jCHEKS.communicator.tcp;
 
 import com.archosResearch.jCHEKS.communicator.Communication;
+import com.archosResearch.jCHEKS.concept.exception.CommunicationException;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -38,7 +39,7 @@ public class CommunicationTest {
     }
 
     @Test
-    public void getCipher_should_return_cipher_using_constructor() {
+    public void getCipher_should_return_cipher_using_constructor() throws CommunicationException {
         Communication instance = new Communication(cipher, cipherCheck, systemId);
         System.out.println(instance.getCommunicationString());
         String expResult = cipher;
@@ -79,7 +80,7 @@ public class CommunicationTest {
     }
 
     @Test
-    public void getCommunicationString_should_return_the_communication_in_string_format() {
+    public void getCommunicationString_should_return_the_communication_in_string_format() throws CommunicationException {
         Communication instance = new Communication(cipher, cipherCheck, systemId);
         String expResult = communicationString;
         String result = instance.getCommunicationString();

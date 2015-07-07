@@ -3,13 +3,9 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 import com.archosResearch.jCHEKS.communicator.*;
 import com.archosResearch.jCHEKS.communicator.tcp.exception.*;
 import com.archosResearch.jCHEKS.concept.communicator.AbstractCommunication;
-import com.archosResearch.jCHEKS.concept.exception.CommunicatorException;
+import com.archosResearch.jCHEKS.concept.exception.*;
 import java.io.*;
-import java.net.ConnectException;
-import java.net.NoRouteToHostException;
-import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.util.logging.*;
+import java.net.*;
 
 /**
  *
@@ -19,6 +15,7 @@ public class TCPSender extends AbstractSender {
 
     private final String ipAddress;
     private final int port;
+    private final static int TIMEOUT = 10000;
 
     public TCPSender(String ipAddress, int port) {
         this.ipAddress = ipAddress;
@@ -30,7 +27,7 @@ public class TCPSender extends AbstractSender {
         Runnable sendCommunicationTask = () -> {
             try {
                 sendCommunicationThread(communication);
-            } catch (TCPSocketException ex) {
+            } catch (TCPSocketException | CommunicationException | TCPAckReceiverException ex) {
                 notifyException(ex, communication);
             }
         };
@@ -39,23 +36,34 @@ public class TCPSender extends AbstractSender {
         sendCommunicationThread.start();
     }
     
-    private void sendCommunicationThread(AbstractCommunication communication) throws TCPSocketException {
+    private void sendCommunicationThread(AbstractCommunication communication) throws TCPSocketException, CommunicationException, TCPAckReceiverException {
         try {
             Socket clientSocket = new Socket(this.ipAddress, port);
-            clientSocket.setSoTimeout(10000); 
+            clientSocket.setSoTimeout(TIMEOUT); 
             DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
-            dataOut.write(communication.getCommunicationString().getBytes());
+            dataOut.writeUTF(communication.getCommunicationString());
 
-            Runnable senderTask = () -> {
-                try {
-                    receiveAck(clientSocket, communication);
-                } catch (TCPAckReceiverException ex) {
-                    Logger.getLogger(TCPSender.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            };
-            Thread senderSecureAckThread = new Thread(senderTask);
-            senderSecureAckThread.setDaemon(true);
-            senderSecureAckThread.start();
+            try {
+                InputStream inFromDestination = clientSocket.getInputStream();
+                DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
+                String ackMessage = dataInFromDestination.readUTF();
+                if(ackMessage.equals(communication.getCipherCheck())) {
+                    notifyMessageACK(communication);         
+                    try {
+                        String secureAckMessage = dataInFromDestination.readUTF();
+                        notifySecureACK(communication, secureAckMessage);
+                    } catch (SocketTimeoutException ex) {
+                        notifyFailSecureACK(communication);
+                    }                               
+                } else {
+                    notifyFailAck(communication);
+                } 
+                clientSocket.close();
+            } catch (SocketTimeoutException ex) {
+                notifyFailAck(communication);
+            } catch (IOException ex) {
+                throw new TCPAckReceiverException("Error when receiving acknowledge", ex);
+            }
 
         } catch (NoRouteToHostException ex) {
             throw new TCPNoRouteException("The destination is unreachable.", ex);
@@ -99,30 +107,6 @@ public class TCPSender extends AbstractSender {
     protected void notifyException(CommunicatorException exception, AbstractCommunication communication) {
         for (SenderObserver observer : this.observers) {
             observer.exceptionThrown(exception, communication);
-        }
-    }
-
-    private void receiveAck(Socket clientSocket, AbstractCommunication communication) throws TCPAckReceiverException {
-        try {
-            InputStream inFromDestination = clientSocket.getInputStream();
-            DataInputStream dataInFromDestination = new DataInputStream(inFromDestination);
-            String ackMessage = dataInFromDestination.readUTF();
-            if(ackMessage.equals(communication.getCipherCheck())) {
-                notifyMessageACK(communication);         
-                try {
-                    String secureAckMessage = dataInFromDestination.readUTF();
-                    notifySecureACK(communication, secureAckMessage);
-                } catch (SocketTimeoutException ex) {
-                    notifyFailSecureACK(communication);
-                }                               
-            } else {
-                notifyFailAck(communication);
-            } 
-            clientSocket.close();
-        } catch (SocketTimeoutException ex) {
-            notifyFailAck(communication);
-        } catch (IOException ex) {
-            throw new TCPAckReceiverException("Error when receiving acknowledge", ex);
         }
     }
 }
