@@ -3,8 +3,7 @@ package com.archosResearch.jCHEKS.communicator.tcp;
 import com.archosResearch.jCHEKS.communicator.*;
 import com.archosResearch.jCHEKS.concept.exception.CommunicationException;
 import com.archosResearch.jCHEKS.communicator.exception.ReceiverObserverNotFoundException;
-import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPCommunicatorException;
-import com.archosResearch.jCHEKS.communicator.tcp.exception.TCPSocketException;
+import com.archosResearch.jCHEKS.communicator.tcp.exception.*;
 import java.io.*;
 import java.net.*;
 import java.util.Arrays;
@@ -74,17 +73,14 @@ public class TCPReceiver extends AbstractReceiver implements Runnable {
 
             DataInputStream dataIn = new DataInputStream(socket.getInputStream());
             DataOutputStream dataOut = new DataOutputStream(socket.getOutputStream());
-
-            //TODO Maybe rethink this.
-            byte[] message = new byte[2048];
-            int bytesRead = dataIn.read(message);
+            
+            String incommingMessage = dataIn.readUTF();          
             System.out.println("Receiving communication");
 
-            message = Arrays.copyOf(message, bytesRead);
             //TODO create better ack system.
             
             //Reception of the message ACK
-            Communication receivedCommunication = Communication.createCommunication(new String(message));
+            Communication receivedCommunication = Communication.createCommunication(incommingMessage);
             dataOut.writeUTF(receivedCommunication.getCipherCheck());
 
             String ackSecure = receiver.notifyMessageReceived(receivedCommunication);
