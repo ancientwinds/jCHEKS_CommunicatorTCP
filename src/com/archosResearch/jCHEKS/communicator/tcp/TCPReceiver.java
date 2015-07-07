@@ -6,7 +6,6 @@ import com.archosResearch.jCHEKS.communicator.exception.ReceiverObserverNotFound
 import com.archosResearch.jCHEKS.communicator.tcp.exception.*;
 import java.io.*;
 import java.net.*;
-import java.util.Arrays;
 import java.util.logging.*;
 
 /**

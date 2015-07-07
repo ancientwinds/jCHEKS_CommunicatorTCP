@@ -15,6 +15,7 @@ public class TCPSender extends AbstractSender {
 
     private final String ipAddress;
     private final int port;
+    private final static int TIMEOUT = 10000;
 
     public TCPSender(String ipAddress, int port) {
         this.ipAddress = ipAddress;
@@ -38,7 +39,7 @@ public class TCPSender extends AbstractSender {
     private void sendCommunicationThread(AbstractCommunication communication) throws TCPSocketException, CommunicationException, TCPAckReceiverException {
         try {
             Socket clientSocket = new Socket(this.ipAddress, port);
-            clientSocket.setSoTimeout(10000); 
+            clientSocket.setSoTimeout(TIMEOUT); 
             DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
             dataOut.writeUTF(communication.getCommunicationString());
 
