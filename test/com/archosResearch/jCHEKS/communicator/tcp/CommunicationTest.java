@@ -41,7 +41,6 @@ public class CommunicationTest {
     @Test
     public void getCipher_should_return_cipher_using_constructor() throws CommunicationException {
         Communication instance = new Communication(cipher, cipherCheck, systemId);
-        System.out.println(instance.getCommunicationString());
         String expResult = cipher;
         String result = instance.getCipher();
         assertEquals(expResult, result);
